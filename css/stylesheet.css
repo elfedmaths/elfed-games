@@ -1,0 +1,107 @@
+/* -------------------- */
+
+:root{
+    --main-back: #ffffff;
+    --main-font: #000000;
+    --main-border: #000000;
+    --main-shadow: #00000080;
+
+    --scroll-back: #ffffff;
+    --scroll-main: #ececec;
+    --scroll-hover: #cfcfcf;
+}
+
+/* -------------------- */
+
+/* Main Structure */
+
+*{
+    box-sizing: border-box;
+    cursor: context-menu;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--main-back);
+    color: var(--main-font);
+    font-size: 12px;
+}
+
+#footer{
+    font-size: 12px;
+    text-align: left;
+    padding-left: 10px;
+    cursor: context-menu;
+    position: fixed;
+    bottom: 5px;
+}
+
+.hidden{
+    display: none !important;
+}
+
+/* -------------------- */
+
+/* Scroll Bar */
+
+::-webkit-scrollbar-track{
+	background-color: var(--scroll-back);
+}
+
+::-webkit-scrollbar{
+	width: 10px;
+    height: 10px;
+	background-color: var(--scroll-back);
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: var(--scroll-main);
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+  background-color: var(--scroll-hover);
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+  background-color: var(--scroll-hover);
+  cursor: pointer;
+}
+
+/* -------------------- */
+
+/* Header */
+
+#header {
+    width: 100vw;
+}
+
+#header h1{
+    margin: 15px auto;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: context-menu;
+    color: var(--main-font);
+}
+
+#header h1:before, #header h1:after {
+    content: "";
+    display: inline-block;
+    width: 10%;
+    margin: 0 .5em 0 -55%;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--main-font);
+}
+
+#header h1:after {
+    margin: 0 -55% 0 .5em;
+}
+
+/* -------------------- */
+
+/* Content */
