@@ -26,7 +26,6 @@ body{
     text-align: center;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: var(--main-back);
     color: var(--main-font);
     font-size: 12px;
@@ -43,6 +42,15 @@ body{
 
 .hidden{
     display: none !important;
+}
+
+#main{
+    width: 100%;
+    padding: 20px;
+}
+
+canvas{
+    margin: auto;
 }
 
 /* -------------------- */
@@ -104,4 +112,29 @@ body{
 
 /* -------------------- */
 
-/* Content */
+/* Score */
+
+#score-container {
+    width: 100vw;
+}
+
+#score-container h2{
+    margin: 15px auto;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: context-menu;
+    color: var(--main-font);
+}
+
+#score-container h2:before, #score-container h2:after {
+    content: "";
+    display: inline-block;
+    width: 10%;
+    margin: 0 .5em 0 -55%;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--main-font);
+}
+
+#score-container h2:after {
+    margin: 0 -55% 0 .5em;
+}
