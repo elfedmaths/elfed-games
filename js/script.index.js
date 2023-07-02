@@ -30,6 +30,28 @@ const ghosts = [
             y: 0,
         },
         colour: 'green'
+    }),
+    new Ghost({
+        position: {
+            x: Boundary.width * 5 + Boundary.width / 2,
+            y: Boundary.height * 8 + Boundary.height / 2,
+        },
+        velocity: {
+            x: Ghost.speed,
+            y: 0,
+        },
+        colour: 'orange'
+    }),
+    new Ghost({
+        position: {
+            x: Boundary.width * 5 + Boundary.width / 2,
+            y: Boundary.height * 8 + Boundary.height / 2,
+        },
+        velocity: {
+            x: Ghost.speed,
+            y: 0,
+        },
+        colour: 'teal'
     })
 ]
 
@@ -159,7 +181,7 @@ function animate(){
                 ghosts.splice(i,1)
             }else{
                 cancelAnimationFrame(animationId)
-                console.log("You Lose!!")
+                alert("You Lose!!")
             }
         }
     }
@@ -196,7 +218,7 @@ function animate(){
 
     if(pellets.length === 0){
         cancelAnimationFrame(animationId)
-        console.log("You Win!!")
+        alert("You Win!!")
     }
     
     boundaries.forEach(boundary => {

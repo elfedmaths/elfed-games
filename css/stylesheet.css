@@ -1,14 +1,14 @@
 /* -------------------- */
 
 :root{
-    --main-back: #ffffff;
-    --main-font: #000000;
+    --main-back: #000000;
+    --main-font: #ffffff;
     --main-border: #000000;
     --main-shadow: #00000080;
 
-    --scroll-back: #ffffff;
-    --scroll-main: #ececec;
-    --scroll-hover: #cfcfcf;
+    --scroll-back: #000000;
+    --scroll-main: #00000080;
+    --scroll-hover: #0000060;
 }
 
 /* -------------------- */

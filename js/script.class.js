@@ -98,7 +98,7 @@ class Pellet {
             0,
             Math.PI * 2
         )
-        c.fillStyle = 'black'
+        c.fillStyle = 'white'
         c.fill()
         c.closePath()
     }
@@ -118,7 +118,7 @@ class PowerUp {
             0,
             Math.PI * 2
         )
-        c.fillStyle = 'black'
+        c.fillStyle = 'white'
         c.fill()
         c.closePath()
     }
