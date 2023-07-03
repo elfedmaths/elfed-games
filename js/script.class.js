@@ -13,7 +13,7 @@ class Boundary {
 }
 
 class Player {
-    static speed = 5
+    static speed = 4
     constructor({position, velocity}){
         this.position = position
         this.velocity = velocity
@@ -36,7 +36,7 @@ class Player {
             Math.PI * 2 - this.radians
         )
         c.lineTo(this.position.x,this.position.y)
-        c.fillStyle = 'yellow'
+        c.fillStyle = 'Yellow'
         c.fill()
         c.closePath()
         c.restore()
@@ -55,11 +55,11 @@ class Player {
 class Ghost {
     static speed = 1
     static scaredTime = 5000
-    constructor({position, velocity, colour = 'red'}){
+    constructor({position, velocity, color}){
         this.position = position
         this.velocity = velocity
         this.radius = 15
-        this.colour = colour
+        this.color = color
         this.prevCollisions = []
         this.speed = 1
         this.scared = false
@@ -73,7 +73,7 @@ class Ghost {
             0,
             Math.PI * 2
         )
-        c.fillStyle = this.scared ? 'blue' : this.colour
+        c.fillStyle = this.scared ? 'Blue' : this.color
         c.fill()
         c.closePath()
     }
@@ -98,7 +98,7 @@ class Pellet {
             0,
             Math.PI * 2
         )
-        c.fillStyle = 'white'
+        c.fillStyle = 'White'
         c.fill()
         c.closePath()
     }
@@ -118,7 +118,7 @@ class PowerUp {
             0,
             Math.PI * 2
         )
-        c.fillStyle = 'white'
+        c.fillStyle = 'White'
         c.fill()
         c.closePath()
     }

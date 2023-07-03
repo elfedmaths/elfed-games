@@ -3,8 +3,8 @@
 :root{
     --main-back: #000000;
     --main-font: #ffffff;
-    --main-border: #000000;
-    --main-shadow: #00000080;
+    --main-border: #ffffff;
+    --main-shadow: #ffffff;
 
     --scroll-back: #000000;
     --scroll-main: #00000080;
@@ -29,6 +29,7 @@ body{
     background-color: var(--main-back);
     color: var(--main-font);
     font-size: 12px;
+    overflow: hidden;
 }
 
 #footer{
@@ -137,4 +138,56 @@ canvas{
 
 #score-container h2:after {
     margin: 0 -55% 0 .5em;
+}
+
+/* -------------------- */
+
+/* Corner Menu */
+
+.corner-menu {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+
+.corner-menu .corner-btn{
+    flex: 0 0;
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    border-radius: 10px;
+    background-color: var(--main-back);
+    box-shadow: 0 1px 5px var(--main-shadow);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.corner-menu .corner-btn img{
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    filter: invert();
+}
+
+.corner-menu .corner-btn:hover img{
+    animation: pulse 2s linear infinite;
+}
+
+/* -------------------- */
+
+/* Keyframes */
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }

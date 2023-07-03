@@ -9,53 +9,9 @@ canvas.height = 520
 const pellets = []
 const powerUps = []
 const boundaries = []
-const ghosts = [
-    new Ghost({
-        position: {
-            x: Boundary.width * 5 + Boundary.width / 2,
-            y: Boundary.height * 1 + Boundary.height / 2,
-        },
-        velocity: {
-            x: Ghost.speed,
-            y: 0,
-        }
-    }),
-    new Ghost({
-        position: {
-            x: Boundary.width * 5 + Boundary.width / 2,
-            y: Boundary.height * 8 + Boundary.height / 2,
-        },
-        velocity: {
-            x: Ghost.speed,
-            y: 0,
-        },
-        colour: 'green'
-    }),
-    new Ghost({
-        position: {
-            x: Boundary.width * 5 + Boundary.width / 2,
-            y: Boundary.height * 8 + Boundary.height / 2,
-        },
-        velocity: {
-            x: Ghost.speed,
-            y: 0,
-        },
-        colour: 'orange'
-    }),
-    new Ghost({
-        position: {
-            x: Boundary.width * 5 + Boundary.width / 2,
-            y: Boundary.height * 8 + Boundary.height / 2,
-        },
-        velocity: {
-            x: Ghost.speed,
-            y: 0,
-        },
-        colour: 'teal'
-    })
-]
+const ghosts = []
 
-const player= new Player({
+const player = new Player({
     position: {
         x: Boundary.width + Boundary.width / 2,
         y: Boundary.height + Boundary.height / 2,
@@ -67,22 +23,16 @@ const player= new Player({
 })
 
 const keys = {
-    w: {
-        pressed: false
-    },
-    a: {
-        pressed: false
-    },
-    s: {
-        pressed: false
-    },
-    d: {
-        pressed: false
-    }
+    up: { pressed: false },
+    left: { pressed: false },
+    down: { pressed: false },
+    right: { pressed: false }
 }
 
+let animationId
 let lastKey = ''
 let score = 0
+let paused = false
 
 function createImage(src){
     const image = new Image()
@@ -92,20 +42,46 @@ function createImage(src){
     return image
 }
 
-function circleCollidesWithRectangle({circle, rectangle}){
-    const padding = Boundary.width/2 - circle.radius - 1
-    return (circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height + padding && 
-            circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x - padding && 
-            circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y - padding && 
-            circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.width + padding)
+function createGhost(color){
+    ghosts.push(
+        new Ghost({
+            position: {
+                x: Boundary.width * 5 + Boundary.width / 2,
+                y: Boundary.height * 4 + Boundary.height / 2,
+            },
+            velocity: {
+                x: Ghost.speed,
+                y: 0,
+            },
+            color: color
+        })
+    )
 }
 
-let animationId
+function circleCollidesWithRectangle({circle, rectangle}){
+    const padding = Boundary.width/2 - circle.radius - 1
+    return (circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height + padding
+        &&  circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x - padding
+        && circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y - padding
+        && circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.width + padding)
+}
+
+function createQuestion(){
+    var int1 = Math.floor(Math.random() * 10) + 1;
+        int2 = Math.floor(Math.random() * 10) + 1;
+    let question = prompt(int1 + " + " + int2, "Enter Answer Here")
+    if (question == int1 + int2) return true
+    return false
+}
+
+function increaseGhostSpeed(){
+    Ghost.speed += 0.25
+}
 
 function animate(){
-    animationId = requestAnimationFrame(animate)
+    if(!paused) animationId = requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
-    if(keys.w.pressed && lastKey === 'w'){
+    if(keys.up.pressed && lastKey === 'ArrowUp'){
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i]
             if(circleCollidesWithRectangle({
@@ -121,7 +97,7 @@ function animate(){
                 player.velocity.y = -Player.speed
             }
         }
-    }else if(keys.a.pressed && lastKey === 'a'){
+    }else if(keys.left.pressed && lastKey === 'ArrowLeft'){
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i]
             if(circleCollidesWithRectangle({
@@ -137,7 +113,7 @@ function animate(){
                 player.velocity.x = -Player.speed
             }
         }
-    }else if(keys.s.pressed && lastKey === 's'){
+    }else if(keys.down.pressed && lastKey === 'ArrowDown'){
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i]
             if(circleCollidesWithRectangle({
@@ -153,7 +129,7 @@ function animate(){
                 player.velocity.y = Player.speed
             }
         }
-    }else if(keys.d.pressed && lastKey === 'd'){
+    }else if(keys.right.pressed && lastKey === 'ArrowRight'){
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i]
             if(circleCollidesWithRectangle({
@@ -176,12 +152,19 @@ function animate(){
         if(Math.hypot(
             ghost.position.x - player.position.x,
             ghost.position.y - player.position.y
-        ) < ghost.radius + player.radius){
+        ) < ghost.radius + player.radius){            
             if(ghost.scared){
                 ghosts.splice(i,1)
             }else{
-                cancelAnimationFrame(animationId)
-                alert("You Lose!!")
+                paused = true
+                if(createQuestion()){
+                    ghosts.splice(i,1)
+                    createGhost(ghost.color)
+                    paused = false
+                }else{
+                    cancelAnimationFrame(animationId)
+                    alert("You lose!!!")
+                }
             }
         }
     }
@@ -194,12 +177,14 @@ function animate(){
             powerUp.position.y - player.position.y
         ) < powerUp.radius + player.radius){
             powerUps.splice(i, 1)
-            ghosts.forEach(ghost => {
-                ghost.scared = true
-                setTimeout(() => {
-                    ghost.scared = false
-                }, Ghost.scaredTime)
-            })
+            if(createQuestion()){
+                ghosts.forEach(ghost => {
+                    ghost.scared = true
+                    setTimeout(() => {
+                        ghost.scared = false
+                    }, Ghost.scaredTime)
+                })
+            }
         }
     }
 
@@ -217,8 +202,22 @@ function animate(){
     }
 
     if(pellets.length === 0){
-        cancelAnimationFrame(animationId)
-        alert("You Win!!")
+        createMap()
+        increaseGhostSpeed()
+        switch (ghosts.length){
+            case 0:
+                createGhost('Red')
+                break
+            case 1:
+                createGhost('Green')
+                break
+            case 2:
+                createGhost('Teal')
+                break
+            case 3:
+                createGhost('Pink')
+                break
+        }
     }
     
     boundaries.forEach(boundary => {
@@ -324,38 +323,38 @@ animate()
 
 addEventListener('keydown', ({key}) => {
     switch(key){
-        case 'w':
-            keys.w.pressed = true
-            lastKey ='w'
+        case 'ArrowUp':
+            keys.up.pressed = true
+            lastKey = key
             break
-        case 'a':
-            keys.a.pressed = true
-            lastKey ='a'
+        case 'ArrowLeft':
+            keys.left.pressed = true
+            lastKey = key
             break
-        case 's':
-            keys.s.pressed = true
-            lastKey ='s'
+        case 'ArrowDown':
+            keys.down.pressed = true
+            lastKey = key
             break
-        case 'd':
-            keys.d.pressed = true
-            lastKey ='d'
+        case 'ArrowRight':
+            keys.right.pressed = true
+            lastKey = key
             break
     }
 })
 
 addEventListener('keyup', ({key}) => {
     switch(key){
-        case 'w':
-            keys.w.pressed = false
+        case 'ArrowUp':
+            keys.up.pressed = false
             break
-        case 'a':
-            keys.a.pressed = false
+        case 'ArrowLeft':
+            keys.left.pressed = false
             break
-        case 's':
-            keys.s.pressed = false
+        case 'ArrowDown':
+            keys.down.pressed = false
             break
-        case 'd':
-            keys.d.pressed = false
+        case 'ArrowRight':
+            keys.right.pressed = false
             break
     }
 })
