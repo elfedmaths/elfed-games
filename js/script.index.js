@@ -1,5 +1,7 @@
 const mainContainer = document.querySelector('#main')
 const scoreEl = document.querySelector('#score-elem')
+const levelEl = document.querySelector('#level-elem')
+const livesEl = document.querySelectorAll('.lives-elem')
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
@@ -33,6 +35,9 @@ let animationId
 let lastKey = ''
 let score = 0
 let paused = false
+let level = 1
+let lives = 3
+let ghostCount = 0
 
 function createImage(src){
     const image = new Image()
@@ -69,7 +74,7 @@ function circleCollidesWithRectangle({circle, rectangle}){
 function createQuestion(){
     var int1 = Math.floor(Math.random() * 10) + 1;
         int2 = Math.floor(Math.random() * 10) + 1;
-    let question = prompt(int1 + " + " + int2, "Enter Answer Here")
+    let question = prompt(int1 + " + " + int2)
     if (question == int1 + int2) return true
     return false
 }
@@ -157,7 +162,8 @@ function animate(){
                 ghosts.splice(i,1)
             }else{
                 paused = true
-                if(createQuestion()){
+                if(createQuestion() && lives >= 0){
+                    lives--
                     ghosts.splice(i,1)
                     createGhost(ghost.color)
                     paused = false
@@ -177,14 +183,16 @@ function animate(){
             powerUp.position.y - player.position.y
         ) < powerUp.radius + player.radius){
             powerUps.splice(i, 1)
-            if(createQuestion()){
-                ghosts.forEach(ghost => {
-                    ghost.scared = true
-                    setTimeout(() => {
-                        ghost.scared = false
-                    }, Ghost.scaredTime)
-                })
-            }
+           
+                if(ghosts.length > 0 && createQuestion()){
+                    ghosts.forEach(ghost => {
+                        ghost.scared = true
+                        setTimeout(() => {
+                            ghost.scared = false
+                        }, Ghost.scaredTime)
+                    })
+                }
+            
         }
     }
 
@@ -201,23 +209,28 @@ function animate(){
         }
     }
 
+    livesEl.forEach((lifeEl, i) => {
+        if(i < lives) lifeEl.innerHTML = "&#10084"
+        else lifeEl.innerHTML = ""
+    })
+
     if(pellets.length === 0){
-        createMap()
+        createMap(1)
         increaseGhostSpeed()
-        switch (ghosts.length){
+        switch (ghostCount){
+            case 3:
+                createGhost('Pink')
+            case 2:
+                createGhost('Teal')
+            case 1:
+                createGhost('Green')
             case 0:
                 createGhost('Red')
                 break
-            case 1:
-                createGhost('Green')
-                break
-            case 2:
-                createGhost('Teal')
-                break
-            case 3:
-                createGhost('Pink')
-                break
         }
+        ghostCount++
+        level++
+        levelEl.innerHTML = level
     }
     
     boundaries.forEach(boundary => {
@@ -318,7 +331,7 @@ function animate(){
     else if(player.velocity.y < 0) player.rotation = Math.PI * 1.5
 }
 
-createMap()
+createMap(0)
 animate()
 
 addEventListener('keydown', ({key}) => {
