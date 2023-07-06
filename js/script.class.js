@@ -123,3 +123,23 @@ class PowerUp {
         c.closePath()
     }
 }
+
+class Display {
+    constructor({position, image, text = ""}) {
+        this.position = position
+        this.width = Boundary.width
+        this.height = Boundary.height
+        this.image = image
+        this.text = text
+    }
+
+    draw(){
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+
+    addText(){
+        c.textAlign = "center";
+        c.font = "20px Arial White";
+        c.fillText(this.text, canvas.width/2, canvas.height/2);
+    }
+}

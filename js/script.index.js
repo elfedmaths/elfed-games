@@ -8,11 +8,6 @@ const c = canvas.getContext('2d')
 canvas.width = 440
 canvas.height = 520
 
-const pellets = []
-const powerUps = []
-const boundaries = []
-const ghosts = []
-
 const player = new Player({
     position: {
         x: Boundary.width + Boundary.width / 2,
@@ -31,6 +26,12 @@ const keys = {
     right: { pressed: false }
 }
 
+let pellets = []
+let powerUps = []
+let boundaries = []
+let ghosts = []
+let displays = []
+
 let animationId
 let lastKey = ''
 let score = 0
@@ -38,6 +39,7 @@ let paused = false
 let level = 1
 let lives = 3
 let ghostCount = 0
+let scaredTimeout
 
 function createImage(src){
     const image = new Image()
@@ -47,12 +49,12 @@ function createImage(src){
     return image
 }
 
-function createGhost(color){
+function createGhost(color, xco, yco){
     ghosts.push(
         new Ghost({
             position: {
-                x: Boundary.width * 5 + Boundary.width / 2,
-                y: Boundary.height * 4 + Boundary.height / 2,
+                x: Boundary.width * xco + Boundary.width / 2,
+                y: Boundary.height * yco + Boundary.height / 2,
             },
             velocity: {
                 x: Ghost.speed,
@@ -183,16 +185,15 @@ function animate(){
             powerUp.position.y - player.position.y
         ) < powerUp.radius + player.radius){
             powerUps.splice(i, 1)
-           
-                if(ghosts.length > 0 && createQuestion()){
-                    ghosts.forEach(ghost => {
-                        ghost.scared = true
-                        setTimeout(() => {
-                            ghost.scared = false
-                        }, Ghost.scaredTime)
-                    })
-                }
-            
+            if(ghosts.length > 0 && createQuestion()){
+                clearTimeout(scaredTimeout)
+                ghosts.forEach(ghost => {
+                    ghost.scared = true
+                    scaredTimeout = setTimeout(() => {
+                        ghost.scared = false
+                    }, Ghost.scaredTime)
+                })
+            }
         }
     }
 
@@ -215,24 +216,38 @@ function animate(){
     })
 
     if(pellets.length === 0){
+        boundaries = []
+        ghosts = []
+        player.position.x = Boundary.width * 5 + Boundary.width / 2,
+        player.position.y = Boundary.height * 8 + Boundary.height / 2,
         createMap(1)
-        increaseGhostSpeed()
         switch (ghostCount){
+            case 7:
+                createGhost('Aqua',5,11)
+            case 6:
+                createGhost('Fuchsia',9,11)
+            case 5:
+                createGhost('Purple',1,11)
+            case 4:
+                createGhost('Orange',9,6)
             case 3:
-                createGhost('Pink')
+                createGhost('Pink',1,6)
             case 2:
-                createGhost('Teal')
+                createGhost('Teal',9,9)
             case 1:
-                createGhost('Green')
+                createGhost('Green',1,1)
             case 0:
-                createGhost('Red')
+                createGhost('Red',5,4)
+                break
+            default:
+                increaseGhostSpeed()
                 break
         }
         ghostCount++
         level++
         levelEl.innerHTML = level
     }
-    
+  
     boundaries.forEach(boundary => {
         boundary.draw()
         if(circleCollidesWithRectangle({
@@ -243,6 +258,12 @@ function animate(){
             player.velocity.y = 0
         }
     })
+
+    /*
+    displays.forEach(display => {
+        display.draw()
+    })
+    */
 
     player.update()
 
@@ -331,6 +352,7 @@ function animate(){
     else if(player.velocity.y < 0) player.rotation = Math.PI * 1.5
 }
 
+displayBox(0)
 createMap(0)
 animate()
 
