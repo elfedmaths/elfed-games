@@ -125,21 +125,38 @@ class PowerUp {
 }
 
 class Display {
-    constructor({position, image, text = ""}) {
-        this.position = position
-        this.width = Boundary.width
-        this.height = Boundary.height
-        this.image = image
+    constructor({show, size, text}) {
+        this.show = show
+        this.size = size
         this.text = text
     }
 
-    draw(){
-        c.drawImage(this.image, this.position.x, this.position.y)
+    update(){
+        this.hide()
+        if(this.show) displayEl.classList.add('show')
+        if(this.text.h1) displayEl.querySelector('h1').innerHTML = this.text.h1
+        if(this.text.p) displayEl.querySelector('p').innerHTML = this.text.p
     }
 
-    addText(){
-        c.textAlign = "center";
-        c.font = "20px Arial White";
-        c.fillText(this.text, canvas.width/2, canvas.height/2);
+    question(){
+        this.hide()
+        if(this.show) questEl.classList.add('show')
+        if(this.size) questEl.classList.add(this.size)
+        if(this.text.h1) questEl.querySelector('h1').innerHTML = this.text.h1
+        if(this.text.p) questEl.querySelectorAll('p')[0].innerHTML = this.text.p
+        if(this.text.q) questEl.querySelectorAll('p')[1].innerHTML = this.text.q
     }
+
+    notice(){
+        this.hide()
+        if(this.size) noticeEl.classList.add(this.size)
+        noticeEl.classList.add('show')
+    }
+
+    hide(){
+        displayEl.classList = ""
+        questEl.classList = ""
+        noticeEl.classList = ""
+    }
+
 }

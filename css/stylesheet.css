@@ -51,6 +51,85 @@ canvas{
     margin: auto;
 }
 
+#display-container{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+#display-box.show{
+    display: flex;
+}
+
+#display-box{
+    display: none;
+    margin-top: 200px;
+    background-color: black;
+    border: 4px blue solid;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 280px;
+    height: 120px;
+}
+
+#display-container h1{
+    font-size: 16px;
+    text-decoration: underline;
+    margin: 10px auto;
+}
+
+#display-container p{
+    font-size: 12px;
+    margin: 5px auto;
+}
+
+#display-container a, #display-container #submit{
+    text-decoration: none;
+    color: var(--main-font);
+    cursor: pointer;
+    margin: 5px auto;
+}
+
+#notice-box.show, #question-box.show{
+    display: flex;
+}
+
+#notice-box, #question-box{
+    display: none;
+    margin-top: 120px;
+    width: 440px;
+    background-color: black;
+    border: 4px blue solid;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+#notice-box{
+    height: 360px;
+}
+
+#question-box{
+    height: 280px;
+}
+
+#notice-box.tall, #question-box.tall{
+    height: 520px;
+}
+
+#question-box input{
+    width: 100px;
+    height: 40px;
+    background-color: #00000020;
+    margin: 5px auto;
+    color: var(--main-font);
+}
+
 /* -------------------- */
 
 /* Header */
@@ -149,4 +228,34 @@ canvas{
     0% { transform: scale(1); }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
+}
+
+/* -------------------- */
+
+/* Navigation */
+
+#nav-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#nav-container .flex-row:nth-child(odd){
+    width: 100%;
+    flex: 1 1; 
+    display: flex;
+}
+
+#nav-container .flex-row:nth-child(even){
+    width: 100%;
+    flex: 2 2; 
+    display: flex;
+}
+
+#nav-container .flex-row .nav-btn{
+    flex: 1 1;
 }
