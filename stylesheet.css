@@ -6,24 +6,11 @@
     --main-border: #000000;
     --main-shadow: #00000080;
 
-    --off-back: #9999993b;
-    --off-back-hover: #99999970;
-
     --disabled-font: #b4b4b4;
-
-    --button-back: #ffffff;
-    --button-border: #000000;
-    --button-hover: #cfcfcf;
-
-    --menu-line: #000000;
 
     --scroll-back: #ffffff;
     --scroll-main: #ececec;
     --scroll-hover: #cfcfcf;
-
-    --font-success: #00ff00;
-    --font-fail: #ff0000;
-
 }
 
 /* -------------------- */
@@ -158,7 +145,15 @@ body{
     cursor: pointer;
 }
 
-#main .content-box:not(.disabled):hover h1{
+#main .content-box.disabled h1, #main .content-box.disabled p{
+    color: var(--disabled-font);
+}
+
+#main .content-box img{
+    height: 180px;
+}
+
+#main .content-box:not(.disabled):hover{
     transform: scale(1.2);
 }
 
