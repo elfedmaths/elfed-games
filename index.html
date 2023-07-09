@@ -1,66 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>PacMaths</title>
+	<title>Games</title>
 	<meta name="author" content="M. Massey">
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="./css/resetstyle.css">
-    <link rel="stylesheet" href="./css/stylesheet.css">
-    <script src="./js/math.script.js"></script>
-    <script src="./js/class.script.js" defer></script>
-    <script src="./js/var.script.js" defer></script>
-    <script src="./js/func.script.js" defer></script>
-    <script src="./js/keys.script.js" defer></script>
-    <script src="./js/map.script.js" defer></script>
-    <script src="./js/index.script.js" defer></script>
+    <link rel="stylesheet" href="./stylesheet.css">
 	<meta name="description" content="Maths practice resource">
 </head>
 <body>
     <div id="header">
-        <h1>PacMaths</h1>
-    </div>
-    <div id="score-container">
-        <h2>Level : <span id="level-elem">0</span></h2>
-        <h2>Score : <span id="score-elem">0</span></h2>
-        <h2>
-            <span class="lives-elem"></span>
-            <span class="lives-elem"></span>
-            <span class="lives-elem"></span>
-        </h2>
+        <h1>Maths Games</h1>
     </div>
     <div id="main">
-        <canvas id="game-board"></canvas>
-    </div>
-    <div id="nav-container">
-        <div class="flex-row">
-            <div id="up" class="nav-btn"></div>
-        </div>
-        <div class="flex-row">
-            <div id="right" class="nav-btn"></div>
-            <div id="down" class="nav-btn"></div>
-        </div>
-        <div class="flex-row">
-            <div id="left" class="nav-btn"></div>
-        </div>
-    </div>
-    <div id="display-container">
-        <div id="display-box">
-            <h1></h1>
-            <p></p>
-        </div>
-        <div id="question-box">
-            <h1></h1>
-            <p></p>
-            <p></p>
-            <input type="number" name="number" id="answer-input" autocomplete="off" autofocus>
-            <p id="submit">Submit</p>
-        </div>
-        <div id="notice-box">
-            <h1>Game Over</h1>
-            <a href="./">Restart</a>
-        </div>
+        <a href="./pacmaths/" class="content-box">
+            <h1>Pac-Maths</h1>
+            <p>(Under developement)</p>
+        </a>
+        <a href="#" class="content-box disabled">
+            <h1>More Coming Soon...</h1>
+        </a>
     </div>
     <div class="corner-menu">
         <div class="corner-btn pulse-btn" id="home-btn">
@@ -68,7 +28,7 @@
         </div>
     </div>
     <div id="footer">
-        <p>Copyright &copy; 2023 -  <script>document.write(new Date().getFullYear())</script>, M. Massey.</p>
+        <p>Copyright &copy; 2022 -  <script>document.write(new Date().getFullYear())</script>, M. Massey.</p>
     </div>
 </body>
 </html>
