@@ -77,13 +77,37 @@ canvas{
     height: 120px;
 }
 
-#display-container h1{
+#error-box{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    height: 120px;
+}
+
+#error-box div{
+    display: flex;
+    margin-top: 200px;
+    background-color: black;
+    border: 4px blue solid;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 280px;
+    height: 120px;
+}
+
+#display-container h1, #error-box h1{
     font-size: 16px;
     text-decoration: underline;
     margin: 10px auto;
 }
 
-#display-container p{
+#display-container p, #error-box p{
     font-size: 12px;
     margin: 5px auto;
 }
@@ -128,6 +152,15 @@ canvas{
     background-color: #00000020;
     margin: 5px auto;
     color: var(--main-font);
+}
+
+@media (max-width: 767px) {
+    #error-box {
+        display: flex;
+    }
+    #content {
+        display: none;
+    }
 }
 
 /* -------------------- */

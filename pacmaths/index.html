@@ -18,48 +18,57 @@
 	<meta name="description" content="Maths practice resource">
 </head>
 <body>
-    <div id="header">
-        <h1>PacMaths</h1>
-    </div>
-    <div id="score-container">
-        <h2>Level : <span id="level-elem">0</span></h2>
-        <h2>Score : <span id="score-elem">0</span></h2>
-        <h2>
-            <span class="lives-elem"></span>
-            <span class="lives-elem"></span>
-            <span class="lives-elem"></span>
-        </h2>
-    </div>
-    <div id="main">
-        <canvas id="game-board"></canvas>
-    </div>
-    <div id="nav-container">
-        <div class="flex-row">
-            <div id="up" class="nav-btn"></div>
-        </div>
-        <div class="flex-row">
-            <div id="right" class="nav-btn"></div>
-            <div id="down" class="nav-btn"></div>
-        </div>
-        <div class="flex-row">
-            <div id="left" class="nav-btn"></div>
+    <div id="error-box">
+        <div>
+            <h1>Oh no...</h1>
+            <p>Unfortunately PacMaths is not available on mobile devices</p>
+            <p>Please try again on a larger device</p>
         </div>
     </div>
-    <div id="display-container">
-        <div id="display-box">
-            <h1></h1>
-            <p></p>
+    <div id="content">
+        <div id="header">
+            <h1>PacMaths</h1>
         </div>
-        <div id="question-box">
-            <h1></h1>
-            <p></p>
-            <p></p>
-            <input type="number" name="number" id="answer-input" autocomplete="off" autofocus>
-            <p id="submit">Submit</p>
+        <div id="score-container">
+            <h2>Level : <span id="level-elem">0</span></h2>
+            <h2>Score : <span id="score-elem">0</span></h2>
+            <h2>
+                <span class="lives-elem"></span>
+                <span class="lives-elem"></span>
+                <span class="lives-elem"></span>
+            </h2>
         </div>
-        <div id="notice-box">
-            <h1>Game Over</h1>
-            <a href="./">Restart</a>
+        <div id="main">
+            <canvas id="game-board"></canvas>
+        </div>
+        <div id="nav-container">
+            <div class="flex-row">
+                <div id="up" class="nav-btn"></div>
+            </div>
+            <div class="flex-row">
+                <div id="right" class="nav-btn"></div>
+                <div id="down" class="nav-btn"></div>
+            </div>
+            <div class="flex-row">
+                <div id="left" class="nav-btn"></div>
+            </div>
+        </div>
+        <div id="display-container">
+            <div id="display-box">
+                <h1></h1>
+                <p></p>
+            </div>
+            <div id="question-box">
+                <h1></h1>
+                <p></p>
+                <p></p>
+                <input type="number" name="number" id="answer-input" autocomplete="off" autofocus>
+                <p id="submit">Submit</p>
+            </div>
+            <div id="notice-box">
+                <h1>Game Over</h1>
+                <a href="./">Restart</a>
+            </div>
         </div>
     </div>
     <div class="corner-menu">
