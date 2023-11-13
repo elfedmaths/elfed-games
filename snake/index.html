@@ -1,133 +1,45 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Snake Game</title>
-    <style>
-      canvas {
-        background-color: #ddd;
-        display: block;
-        margin: 0 auto;
-      }
-    </style>
-  </head>
+<html lang="en">
+<head>
+    <title>Maths Snake</title>
+    <meta name="author" content="M. Massey">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/resetstyle.css">
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="./js/index.script.js" defer></script>
+    <script src="./js/format.script.js" defer></script>
+    <meta name="description" content="JS Maths Snake Game">
+</head>
   <body>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <script>
-      // Game variables
-      var canvas = document.getElementById("gameCanvas");
-      var ctx = canvas.getContext("2d");
-      var snakeSize = 20;
-      var direction = "right";
-      var snake = [
-        { x: 160, y: 160 },
-        { x: 140, y: 160 },
-        { x: 120, y: 160 },
-        { x: 100, y: 160 },
-      ];
-      var food = { x: 0, y: 0 };
-      var score = 0;
-
-      // Generate random food location
-      function generateFood() {
-        food.x = Math.floor(Math.random() * (canvas.width / snakeSize)) * snakeSize;
-        food.y = Math.floor(Math.random() * (canvas.height / snakeSize)) * snakeSize;
-      }
-
-      // Update game state
-      function update() {
-        // Move the snake
-        var head = { x: snake[0].x, y: snake[0].y };
-        switch (direction) {
-          case "up":
-            head.y -= snakeSize;
-            break;
-          case "down":
-            head.y += snakeSize;
-            break;
-          case "left":
-            head.x -= snakeSize;
-            break;
-          case "right":
-            head.x += snakeSize;
-            break;
-        }
-        snake.unshift(head);
-
-        // Check if snake eats the food
-        if (head.x === food.x && head.y === food.y) {
-          score += 10;
-          generateFood();
-        } else {
-          snake.pop();
-        }
-
-        // Check for game over conditions
-        if (
-          head.x < 0 ||
-          head.x >= canvas.width ||
-          head.y < 0 ||
-          head.y >= canvas.height ||
-          checkCollision(head)
-        ) {
-          clearInterval(gameLoop);
-        }
-
-        // Render game state
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#333";
-        snake.forEach(function (segment) {
-          ctx.fillRect(segment.x, segment.y, snakeSize, snakeSize);
-        });
-
-        ctx.fillStyle = "#f00";
-        ctx.fillRect(food.x, food.y, snakeSize, snakeSize);
-
-        ctx.fillStyle = "#000";
-        ctx.font = "20px Arial";
-        ctx.fillText("Score: " + score, 10, 20);
-      }
-
-      // Check if snake collides with itself
-      function checkCollision(head) {
-        for (var i = 1; i < snake.length; i++) {
-          if (head.x === snake[i].x && head.y === snake[i].y) {
-            return true;
-          }
-        }
-        return false;
-      }
-
-      // Handle keyboard input
-      function handleKeydown(event) {
-        var key = event.keyCode;
-        switch (key) {
-          case 37:
-            if (direction !== "right") {
-              direction = "left";
-            }
-            break;
-          case 38:
-            if (direction !== "down") {
-              direction = "up";
-            }
-            break;
-          case 39:
-            if (direction !== "left") {
-              direction = "right";
-            }
-            break;
-          case 40:
-            if (direction !== "up") {
-              direction = "down";
-            }
-            break;
-        }
-      }
-
-      // Start the game
-      generateFood();
-      var gameLoop = setInterval(update, 100);
-      document.addEventListener("keydown", handleKeydown);
-    </script>
+    <div id="main">
+      <canvas id="gameCanvas" height="100" width="100"></canvas>
+    </div>
+    <div id="stats">
+      <h1>Maths Snake</h1>
+      <p id="error"></p>
+      <div>
+        <p>Prime numbers</p>
+        <p>Score: <span id="score">0</span></p>
+        <p>Highscore: <span id="high-score">0</span></p>
+      </div>
+    </div>
+    <div id="start-container">
+      <div id="start-box">
+        <div>
+          <p id="start-game">Start</p>
+          <p class="hidden">Score: <span id="score">0</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="corner-menu">
+      <div class="corner-btn pulse-btn" id="home-btn">
+          <a href="../"><img src="./img/home-icon.svg" alt="Home"></a>
+      </div>
+    </div>
+    <div id="footer">
+        <p>Copyright &copy; 2023 -  <script>document.write(new Date().getFullYear())</script>, M. Massey.</p>
+    </div>
   </body>
 </html>

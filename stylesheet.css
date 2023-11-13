@@ -117,10 +117,11 @@ body{
 }
 
 #main .content-box{
-    flex: 1 1;
+    flex: 1 1 200px;
     max-width: 300px;
     height: 300px;
-    margin: 0 10px;
+    margin: 10px;
+    padding: 10px;
     text-decoration: none;
     box-shadow: 0 1px 5px var(--main-shadow);
     overflow: hidden;
@@ -148,6 +149,10 @@ body{
 
 #main .content-box.disabled h1, #main .content-box.disabled p{
     color: var(--disabled-font);
+}
+
+#main .content-box.disabled img{
+    filter: opacity(50%);
 }
 
 #main .content-box img{
