@@ -10,7 +10,7 @@ function math(){
 }
 
 function lengthCheck(){
-    if(coordArr.length < 150){
+    if(coordArr.length < 100){
         data['error'] = "Not enough data points";
     }
 }
