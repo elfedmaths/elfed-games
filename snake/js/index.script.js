@@ -2,10 +2,14 @@
 var canvas = document.querySelector("#gameCanvas");
 var ctx = canvas.getContext("2d");
 var startContainer = document.querySelector("#start-container");
+var topicBtn = document.querySelector("#topic-opt");
 var startBtn = document.querySelector("#start-game");
 var scoreBtns = document.querySelectorAll("#score");
 var scoreHigh = document.querySelector("#high-score");
+var topicLabel = document.querySelector("#topic");
 var snake, gameLoop, score, snakeSize = 20, direction, items, color;
+var ansArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+  
 
 function setGame(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -18,6 +22,7 @@ function setGame(){
   score = 0
   direction = "right"
   color = randColor()
+  canvas.classList.remove("red")
   generateFood()
   updateBoard()
 }
@@ -166,17 +171,43 @@ function flash(option){
 function endGame(){
   clearInterval(gameLoop)
   highScore()
+  canvas.classList.add("red")
   startBtn.innerHTML = "Try Again"
   startContainer.classList.remove("hidden")
 }
 
 function generateAnswers(){
-  var primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-  var int = randomInt(0,primes.length - 1)
-  var correct = primes[int]
-  var wrong1 = randomExclude(1,100,primes)
-  var wrong2 = randomExclude(1,100,primes)
+  var int = randomInt(0,ansArr.length - 1)
+  var correct = ansArr[int]
+  var wrong1 = randomExclude(1,99,ansArr)
+  var wrong2 = randomExclude(1,99,ansArr)
   return [correct, wrong1, wrong2]
+}
+
+function selectLevel(){
+  var topic = topicBtn.value
+  var topicText
+  if(topic){
+    switch (topic) {
+      case 'prime':
+        ansArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+        topicText = "Prime Numbers"
+        break;
+      case 'square':
+        ansArr = [1, 4,9, 16, 25, 36, 49, 64, 81]
+        topicText = "Square Numbers"
+        break;
+      case 'triangle':
+        ansArr = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91]
+        topicText = "Triangle Numbers"
+        break;
+      default:
+        break;
+    }
+    topicLabel.innerHTML = topicText
+    return true;
+  }
+  return false;
 }
 
 function randomInt(min,max){
@@ -201,11 +232,18 @@ function randColor() {
 }
 
 startBtn.addEventListener("click", function(){
-  startContainer.classList.add("hidden")
-  var subScore = startContainer.querySelector(".hidden")
-  if(subScore) subScore.classList.remove("hidden")
-  setGame()
-  startGame()
+  if(selectLevel()){
+    startContainer.classList.add("hidden")
+    var subScore = startContainer.querySelector(".hidden")
+    if(subScore) subScore.classList.remove("hidden")
+    setGame()
+    startGame()
+  }else{
+    topicBtn.classList.add("error")
+    setTimeout(() => {
+      topicBtn.classList.remove("error")
+    }, "1000");
+  }
 })
 
 document.addEventListener("keydown", handleKeydown);

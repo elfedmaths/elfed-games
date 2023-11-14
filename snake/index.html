@@ -20,15 +20,23 @@
       <h1>Maths Snake</h1>
       <p id="error"></p>
       <div>
-        <p>Prime numbers</p>
-        <p>Score: <span id="score">0</span></p>
+        <p>Topic: <span id="topic"></span></p>
         <p>Highscore: <span id="high-score">0</span></p>
+        <p>Score: <span id="score">0</span></p>
       </div>
     </div>
     <div id="start-container">
       <div id="start-box">
         <div>
           <p id="start-game">Start</p>
+          <div class="custom-select">
+            <select id="topic-opt">
+                <option value="" hidden>Select Topic</option>
+                <option value="prime">Prime Numbers</option>
+                <option value="square">Square Numbers</option>
+                <option value="triangle">Triangle Numbers</option>
+            </select>
+          </div>
           <p class="hidden">Score: <span id="score">0</span></p>
         </div>
       </div>

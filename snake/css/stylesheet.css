@@ -147,3 +147,27 @@ body{
     color: #000000;
     margin: 10px;
 }
+
+/* -------------------- */
+
+/* Dropdown Option */
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 0px;
+    cursor: pointer;
+    text-align: center;
+    padding: 2px 20px;
+}
+
+.custom-select select.error {
+    box-shadow: 0 0 5px 5px #ff000071;
+}
