@@ -5,6 +5,8 @@ let color = '#ACD3ED';
 
 document.addEventListener('mousedown', start);
 document.addEventListener('mouseup', stop);
+document.addEventListener('touchstart', start);
+document.addEventListener('touchend', stop);
 window.addEventListener('resize', resize);
 
 function resize() {
