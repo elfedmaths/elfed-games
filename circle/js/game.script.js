@@ -20,6 +20,7 @@ function start(event) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     clearData();
     document.addEventListener('mousemove', draw);
+    document.addEventListener('touchmove', draw);
     reposition(event);
 }
 
@@ -31,6 +32,7 @@ function reposition(event) {
 
 function stop() {
     document.removeEventListener('mousemove', draw);
+    document.removeEventListener('touchmove', draw);
     var data = math();
     showData(data);
 }

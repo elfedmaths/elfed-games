@@ -12,6 +12,24 @@
     <meta name="description" content="JS Maths Logic Game">
 </head>
 <body>
+    <div id="stats">
+        <h1>Maths Logic</h1>
+    </div>
+    <div id="main">
+        <div id="main-column">
+            <div id="main-row">
+                <input id="submitted" type="checkbox" tabindex="-1">
+                <form>
+                    <input type="number" min="0" max="9" maxlength="1" placeholder=" " id="n1" oninput="this.nextElementSibling.focus()" autofocus>
+                    <input type="number" min="0" max="9" maxlength="1" placeholder=" " oninput="this.nextElementSibling.focus()" id="n2">
+                    <input type="number" min="0" max="9" maxlength="1" placeholder=" " oninput="this.nextElementSibling.focus()" id="n3">
+                    <input type="number" min="0" max="9" maxlength="1" placeholder=" " oninput="this.nextElementSibling.focus()" id="n4">
+                    <label class="submit" type="button" tabindex="0" for="submitted" onkeypress="document.getElementById('submitted').checked='true'"></label>
+                	<span class="indicator"></span>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="corner-menu">
         <div class="corner-btn pulse-btn" id="home-btn">
             <a href="../"><img src="./img/home-icon.svg" alt="Home"></a>

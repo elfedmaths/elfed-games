@@ -10,4 +10,8 @@ function respondCanvas() {
     c.height = round20(dimension);
 }
 
+function round20(number) {
+    return Math.round(number / 20) * 20;
+  }
+
 respondCanvas();  

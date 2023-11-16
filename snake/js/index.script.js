@@ -7,9 +7,8 @@ var startBtn = document.querySelector("#start-game");
 var scoreBtns = document.querySelectorAll("#score");
 var scoreHigh = document.querySelector("#high-score");
 var topicLabel = document.querySelector("#topic");
-var snake, gameLoop, score, snakeSize = 20, direction, items, color;
+var snake, gameLoop, score, snakeSize = 20, direction, items, color, startX, startY, endX, endY;
 var ansArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-  
 
 function setGame(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -245,5 +244,34 @@ startBtn.addEventListener("click", function(){
     }, "1000");
   }
 })
+
+canvas.addEventListener('touchstart', function (e) {
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+});
+
+canvas.addEventListener('touchmove', function (e) {
+  e.preventDefault();
+  endX = e.touches[0].clientX;
+  endY = e.touches[0].clientY;
+});
+
+canvas.addEventListener('touchend', function () {
+  var deltaX = endX - startX;
+  var deltaY = endY - startY;
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (deltaX > 0) {
+      direction = "right";
+    } else {
+      direction = "left";
+    }
+  } else {
+    if (deltaY > 0) {
+      direction = "down";
+    } else {
+      direction = "up";
+    }
+  }
+});
 
 document.addEventListener("keydown", handleKeydown);
