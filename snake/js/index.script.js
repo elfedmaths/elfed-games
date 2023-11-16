@@ -2,6 +2,7 @@
 var canvas = document.querySelector("#gameCanvas");
 var ctx = canvas.getContext("2d");
 var startContainer = document.querySelector("#start-container");
+var touchContainer = document.querySelector("#touch-container");
 var topicBtn = document.querySelector("#topic-opt");
 var startBtn = document.querySelector("#start-game");
 var scoreBtns = document.querySelectorAll("#score");
@@ -245,18 +246,18 @@ startBtn.addEventListener("click", function(){
   }
 })
 
-document.addEventListener('touchstart', function (e) {
+touchContainer.addEventListener('touchstart', function (e) {
   startX = e.touches[0].clientX;
   startY = e.touches[0].clientY;
 });
 
-document.addEventListener('touchmove', function (e) {
+touchContainer.addEventListener('touchmove', function (e) {
   e.preventDefault();
   endX = e.touches[0].clientX;
   endY = e.touches[0].clientY;
 });
 
-document.addEventListener('touchend', function () {
+touchContainer.addEventListener('touchend', function () {
   var deltaX = endX - startX;
   var deltaY = endY - startY;
   if (Math.abs(deltaX) > Math.abs(deltaY)) {

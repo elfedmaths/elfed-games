@@ -40,6 +40,15 @@ body{
     box-shadow: 0 0 5px 5px #ff000071;
 }
 
+#touch-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
 /* -------------------- */
 
 /* Corner Menu */
@@ -64,7 +73,7 @@ body{
     background-color: #ffffff;
     box-shadow: 0 1px 5px #000000;
     cursor: pointer;
-    z-index: 2;
+    z-index: 4;
 }
 
 .corner-menu .corner-btn img{
@@ -74,7 +83,7 @@ body{
     margin: 10px;
     position: relative;
     cursor: pointer;
-    z-index: 1;
+    z-index: 3;
 }
 
 .corner-menu .corner-btn:hover img{
@@ -127,6 +136,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 #start-container.hidden, #start-container .hidden{
