@@ -26,6 +26,9 @@ body{
 
 #gameCanvas{
     margin: auto;
+    margin-top: calc(50vh - 60px);
+    transform: translate(0,-50%);
+    padding: 20px;
     border: 1px solid black;
 }
 

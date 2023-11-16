@@ -5,13 +5,9 @@ var container = c.parentNode;
 window.addEventListener('resize', respondCanvas);
 
 function respondCanvas() {
-    var dimension = Math.min(container.offsetWidth, container.offsetHeight);
-    c.width = round20(dimension);
-    c.height = round20(dimension);
+  var dimension = Math.min(container.offsetWidth, container.offsetHeight) - 40;
+  c.width = Math.floor(Math.round(dimension / 20)) * 20;
+  c.height = Math.floor(Math.round(dimension / 20)) * 20;
 }
-
-function round20(number) {
-    return Math.round(number / 20) * 20;
-  }
 
 respondCanvas();  

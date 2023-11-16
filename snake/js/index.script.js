@@ -245,18 +245,18 @@ startBtn.addEventListener("click", function(){
   }
 })
 
-canvas.addEventListener('touchstart', function (e) {
+document.addEventListener('touchstart', function (e) {
   startX = e.touches[0].clientX;
   startY = e.touches[0].clientY;
 });
 
-canvas.addEventListener('touchmove', function (e) {
+document.addEventListener('touchmove', function (e) {
   e.preventDefault();
   endX = e.touches[0].clientX;
   endY = e.touches[0].clientY;
 });
 
-canvas.addEventListener('touchend', function () {
+document.addEventListener('touchend', function () {
   var deltaX = endX - startX;
   var deltaY = endY - startY;
   if (Math.abs(deltaX) > Math.abs(deltaY)) {
