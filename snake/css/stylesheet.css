@@ -22,14 +22,15 @@ body{
     width: 100%;
     height: calc(100% - 120px);
     margin-top: 55px;
+    padding: 0 20px;
 } 
 
 #gameCanvas{
     margin: auto;
     margin-top: calc(50vh - 60px);
     transform: translate(0,-50%);
-    padding: 20px;
     border: 1px solid black;
+    box-sizing: border-box;
 }
 
 #gameCanvas.green{
@@ -62,6 +63,7 @@ body{
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-end;
+    z-index: 2;
 }
 
 .corner-menu .corner-btn{
@@ -73,7 +75,6 @@ body{
     background-color: #ffffff;
     box-shadow: 0 1px 5px #000000;
     cursor: pointer;
-    z-index: 4;
 }
 
 .corner-menu .corner-btn img{

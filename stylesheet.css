@@ -161,7 +161,7 @@ body{
 }
 
 #main .content-box img{
-    height: 180px;
+    height: 60%;
 }
 
 #main .content-box:not(.disabled):hover h1,

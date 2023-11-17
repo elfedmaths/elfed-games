@@ -92,10 +92,11 @@ function updateBoard(){
   snake.forEach(function (segment) {
     ctx.fillRect(segment.x, segment.y, snakeSize, snakeSize);
   });
+  ctx.textAlign = "center";
   ctx.font = snakeSize + "px Arial";
   ctx.fillStyle= "#000"
   for (var i = 0; i < items.length; i++) {
-    ctx.fillText(items[i].int, items[i].x, items[i].y + snakeSize)
+    ctx.fillText(items[i].int, items[i].x + snakeSize / 2, items[i].y + snakeSize)
   }
   scoreBtns.forEach((scoreBtn) => scoreBtn.innerHTML = score)
 }
@@ -116,13 +117,13 @@ function checkItems(head){
       if(index === 0){
         score += 10;
         flash("green");
+        checked = false;
       }else{
         score -= 50;
         if(score < 0) score = 0;
         flash("red");
       }
       generateFood();
-      checked = false;
     }
   }); 
   if(checked) {
