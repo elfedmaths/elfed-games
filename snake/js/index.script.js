@@ -1,29 +1,31 @@
 // Game variables
-var canvas = document.querySelector("#gameCanvas");
-var ctx = canvas.getContext("2d");
-var startContainer = document.querySelector("#start-container");
-var touchContainer = document.querySelector("#touch-container");
-var topicBtn = document.querySelector("#topic-opt");
-var startBtn = document.querySelector("#start-game");
-var scoreBtns = document.querySelectorAll("#score");
-var scoreHigh = document.querySelector("#high-score");
-var topicLabel = document.querySelector("#topic");
-var snake, gameLoop, score, snakeSize = 20, direction, items, color, startX, startY, endX, endY;
-var ansArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+var canvas = document.querySelector("#gameCanvas")
+var ctx = canvas.getContext("2d")
+var startContainer = document.querySelector("#start-container")
+var touchContainer = document.querySelector("#touch-container")
+var topicBtn = document.querySelector("#topic-opt")
+var startBtn = document.querySelector("#start-game")
+var scoreBtns = document.querySelectorAll("#score")
+var scoreHigh = document.querySelector("#high-score")
+var topicLabel = document.querySelector("#topic")
+var snake, gameLoop, score, gridSize, snakeSize, direction, items, color, startX, startY, endX, endY
+var ansArr = ["X"]
 
 function setGame(){
+  gridSize = 25
+  snakeSize = 25
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   snake = [
-    { x: round20(canvas.width/2), y: round20(canvas.width/2) },
-    { x: round20(canvas.width/2) - 20, y: round20(canvas.width/2) },
-    { x: round20(canvas.width/2) - 40, y: round20(canvas.width/2) },
-    { x: round20(canvas.width/2) - 60, y: round20(canvas.width/2) },
+    { x: roundNum(canvas.width/2, gridSize), y: roundNum(canvas.width/2, gridSize) },
+    { x: roundNum(canvas.width/2, gridSize) - (gridSize * 1), y: roundNum(canvas.width/2, gridSize) },
+    { x: roundNum(canvas.width/2, gridSize) - (gridSize * 2), y: roundNum(canvas.width/2, gridSize) },
+    { x: roundNum(canvas.width/2, gridSize) - (gridSize * 3), y: roundNum(canvas.width/2, gridSize) },
   ]
   score = 0
   direction = "right"
   color = randColor()
   canvas.classList.remove("red")
-  generateFood()
+  generateItems()
   updateBoard()
 }
 
@@ -31,27 +33,23 @@ function startGame(){
   gameLoop = setInterval(update, 100);
 }
 
-function round20(number) {
-  return Math.round(number / 20) * 20;
-}
-
-function generateFood() {
+function generateItems() {
   var answers = generateAnswers();
   items = [
     {
       int : answers[0],
-      x : round20(Math.floor(Math.random() * (canvas.width - 39))) + 20,
-      y : round20(Math.floor(Math.random() * (canvas.height - 39))) + 20,
+      x : roundNum(Math.floor(Math.random() * (canvas.width - (2 * gridSize - 1))), gridSize) + gridSize,
+      y : roundNum(Math.floor(Math.random() * (canvas.height - (2 * gridSize - 1))), gridSize) + gridSize,
     },
     {
       int : answers[1],
-      x : round20(Math.floor(Math.random() * (canvas.width - 39))) + 20,
-      y : round20(Math.floor(Math.random() * (canvas.height - 39))) + 20,
+      x : roundNum(Math.floor(Math.random() * (canvas.width - (2 * gridSize - 1))), gridSize) + gridSize,
+      y : roundNum(Math.floor(Math.random() * (canvas.height - (2 * gridSize - 1))), gridSize) + gridSize,
     },
     {
       int : answers[2],
-      x : round20(Math.floor(Math.random() * (canvas.width - 39))) + 20,
-      y : round20(Math.floor(Math.random() * (canvas.height - 39))) + 20,
+      x : roundNum(Math.floor(Math.random() * (canvas.width - (2 * gridSize - 1))), gridSize) + gridSize,
+      y : roundNum(Math.floor(Math.random() * (canvas.height - (2 * gridSize - 1))), gridSize) + gridSize,
     }
   ]
 }
@@ -123,7 +121,7 @@ function checkItems(head){
         if(score < 0) score = 0;
         flash("red");
       }
-      generateFood();
+      generateItems();
     }
   }); 
   if(checked) {
@@ -185,53 +183,6 @@ function generateAnswers(){
   return [correct, wrong1, wrong2]
 }
 
-function selectLevel(){
-  var topic = topicBtn.value
-  var topicText
-  if(topic){
-    switch (topic) {
-      case 'prime':
-        ansArr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-        topicText = "Prime Numbers"
-        break;
-      case 'square':
-        ansArr = [1, 4,9, 16, 25, 36, 49, 64, 81]
-        topicText = "Square Numbers"
-        break;
-      case 'triangle':
-        ansArr = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91]
-        topicText = "Triangle Numbers"
-        break;
-      default:
-        break;
-    }
-    topicLabel.innerHTML = topicText
-    return true;
-  }
-  return false;
-}
-
-function randomInt(min,max){
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-function randomExclude(min, max, excludeArray) {
-  let randomNum;
-  do {
-    randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-  } while (excludeArray.includes(randomNum));
-  return randomNum;
-}
-
-function randColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
 startBtn.addEventListener("click", function(){
   if(selectLevel()){
     startContainer.classList.add("hidden")
@@ -263,15 +214,23 @@ touchContainer.addEventListener('touchend', function () {
   var deltaY = endY - startY;
   if (Math.abs(deltaX) > Math.abs(deltaY)) {
     if (deltaX > 0) {
-      direction = "right";
+      if (direction !== "left") {
+        direction = "right";
+      }
     } else {
-      direction = "left";
+      if (direction !== "right") {
+        direction = "left";
+      }
     }
   } else {
     if (deltaY > 0) {
-      direction = "down";
+      if (direction !== "up") {
+        direction = "down";
+      }
     } else {
-      direction = "up";
+      if (direction !== "down") {
+        direction = "up";
+      }
     }
   }
 });
