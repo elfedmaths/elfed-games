@@ -3,14 +3,11 @@ const scoreEl = document.querySelector('#score-elem')
 const levelEl = document.querySelector('#level-elem')
 const displayCont = document.querySelector('#display-container')
 const startCont = document.querySelector('#start-container')
+const navCont = document.querySelector('#nav-container')
 const displayEl = document.querySelector('#display-box')
 const questEl = document.querySelector('#question-box')
 const noticeEl = document.querySelector('#notice-box')
 const ansEl = document.querySelector('#answer-input')
-const upEl = document.querySelector('#up')
-const rightEl = document.querySelector('#right')
-const downEl = document.querySelector('#down')
-const leftEl = document.querySelector('#left')
 const submitBtn = document.querySelector('#submit')
 const livesEl = document.querySelectorAll('.lives-elem')
 const topicEl = document.querySelector('#topic-opt')
@@ -57,16 +54,8 @@ let boundaries = []
 let ghosts = []
 
 let animationId
-let gameOver = false
-let paused = false
-let numpad = false
+let gameOver = false, paused = false, numpad = false
 let lastKey = ''
-let score = 0
-let level = 0
-let lives = 0
-let ghostCount = 0
-let scaredTimeout
-let answer
-let index
-let questType
-let topic
+let score = 0, level = 0, lives = 0, ghostCount = 0
+let scaredTimeout, answer, index, questType, topic
+let startX, startY, endX, endY

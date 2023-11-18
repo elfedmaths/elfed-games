@@ -48,3 +48,40 @@ document.addEventListener('keyup', ({key}) => {
             break
     }
 })
+
+navCont.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+});
+  
+navCont.addEventListener('touchmove', function (e) {
+    e.preventDefault();
+    endX = e.touches[0].clientX;
+    endY = e.touches[0].clientY;
+});
+  
+navCont.addEventListener('touchend', function () {
+    var deltaX = endX - startX;
+    var deltaY = endY - startY;
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 0) {
+            keys.right.pressed = true
+            lastKey = 'arrowRight'
+            setTimeout(() => {keys.right.pressed = false}, 10)
+        } else {
+            keys.left.pressed = true
+            lastKey = 'arrowLeft'
+            setTimeout(() => {keys.left.pressed = false}, 10)
+        }
+    } else {
+        if (deltaY > 0) {
+            keys.down.pressed = true
+            lastKey = 'arrowDown'
+            setTimeout(() => {keys.down.pressed = false}, 10)
+        } else {
+            keys.up.pressed = true
+            lastKey = 'arrowUp'
+            setTimeout(() => {keys.up.pressed = false}, 10)
+        }
+    }
+  });
