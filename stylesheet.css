@@ -162,6 +162,7 @@ body{
 
 #main .content-box img{
     height: 60%;
+    cursor: pointer;
 }
 
 #main .content-box:not(.disabled):hover h1,
@@ -209,10 +210,6 @@ body{
     cursor: pointer;
     z-index: 1;
 }
-
-/* -------------------- */
-
-/* Animations */
 
 .pulse-btn:hover img{
     animation: pulse 2s linear infinite;

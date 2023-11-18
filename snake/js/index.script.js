@@ -12,8 +12,8 @@ var snake, gameLoop, score, gridSize, snakeSize, direction, items, color, startX
 var ansArr = ["X"]
 
 function setGame(){
-  gridSize = 25
-  snakeSize = 25
+  gridSize = 40
+  snakeSize = 20
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   snake = [
     { x: roundNum(canvas.width/2, gridSize), y: roundNum(canvas.width/2, gridSize) },

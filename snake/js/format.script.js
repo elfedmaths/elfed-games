@@ -1,5 +1,4 @@
 var c = document.getElementById('gameCanvas');
-var ct = c.getContext('2d');
 var container = c.parentNode;
 
 window.addEventListener('resize', respondCanvas);
