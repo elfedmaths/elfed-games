@@ -160,7 +160,7 @@ canvas{
     color: var(--main-font);
 }
 
-@media (max-aspect-ratio: 11/13) {
+@media (max-width: 400px) {
     #error-box {
         display: flex;
     }
