@@ -1,4 +1,4 @@
-addEventListener('keydown', ({key}) => {
+document.addEventListener('keydown', ({key}) => {
     switch(key){
         case 'ArrowUp':
             keys.up.pressed = true
@@ -19,7 +19,7 @@ addEventListener('keydown', ({key}) => {
     }
 })
 
-addEventListener('keyup', ({key}) => {
+document.addEventListener('keyup', ({key}) => {
     switch(key){
         case 'ArrowUp':
             keys.up.pressed = false
@@ -41,7 +41,10 @@ addEventListener('keyup', ({key}) => {
             else if(numpad) enterNumber()
             break
         default:
-            if(numpad && /(^[0-9]$)/.test(key)) appendNumber(key);
+            if(document.activeElement !== document.querySelector("#answer-input") &&
+                numpad && /(^[0-9]$)/.test(key)){
+                     appendNumber(key);
+            }
             break
     }
 })

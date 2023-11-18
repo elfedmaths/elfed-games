@@ -9,9 +9,11 @@
 	<link rel="stylesheet" href="./css/resetstyle.css">
     <link rel="stylesheet" href="./css/stylesheet.css">
     <script src="./js/math.script.js"></script>
+    <script src="./js/format.script.js" defer></script>
+    <script src="./js/quest.script.js" defer></script>
+    <script src="./js/func.script.js" defer></script>
     <script src="./js/class.script.js" defer></script>
     <script src="./js/var.script.js" defer></script>
-    <script src="./js/func.script.js" defer></script>
     <script src="./js/keys.script.js" defer></script>
     <script src="./js/map.script.js" defer></script>
     <script src="./js/index.script.js" defer></script>
@@ -21,7 +23,7 @@
     <div id="error-box">
         <div>
             <h1>Oh no...</h1>
-            <p>Unfortunately PacMaths is not available on mobile devices</p>
+            <p>Unfortunately PacMaths is not available on some screens</p>
             <p>Please try again on a larger device</p>
         </div>
     </div>
@@ -40,6 +42,38 @@
         </div>
         <div id="main">
             <canvas id="game-board"></canvas>
+            <div id="display-container">
+                <div id="display-box">
+                    <h1></h1>
+                    <p></p>
+                </div>
+                <div id="question-box">
+                    <h1></h1>
+                    <p></p>
+                    <p></p>
+                    <input type="number" name="number" id="answer-input" autocomplete="off" autofocus>
+                    <p id="submit">Submit</p>
+                </div>
+                <div id="notice-box">
+                    <h1>Game Over</h1>
+                    <a href="./">Restart</a>
+                </div>
+            </div>
+            <div id="start-container" class="show">
+                <div id="start-box">
+                    <h1>PacMaths</h1>
+                    <div class="custom-select">
+                        <select id="topic-opt">
+                            <option value="" hidden>Select Topic</option>
+                            <option value="add">Addition</option>
+                            <option value="sub">Subtraction</option>
+                            <option value="mult">Multiplication</option>
+                            <option value="div">Division</option>
+                        </select>
+                    </div>
+                    <p id="start-game">Start</p>
+                </div>
+            </div>
         </div>
         <div id="nav-container">
             <div class="flex-row">
@@ -51,23 +85,6 @@
             </div>
             <div class="flex-row">
                 <div id="left" class="nav-btn"></div>
-            </div>
-        </div>
-        <div id="display-container">
-            <div id="display-box">
-                <h1></h1>
-                <p></p>
-            </div>
-            <div id="question-box">
-                <h1></h1>
-                <p></p>
-                <p></p>
-                <input type="number" name="number" id="answer-input" autocomplete="off" autofocus>
-                <p id="submit">Submit</p>
-            </div>
-            <div id="notice-box">
-                <h1>Game Over</h1>
-                <a href="./">Restart</a>
             </div>
         </div>
     </div>

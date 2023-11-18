@@ -78,10 +78,10 @@ function animate(){
                 score += 50
                 scoreEl.innerHTML = score
                 if(level > 4){
-                    let ghostDir = playerDirection()
-                    let xpos = 5, ypos = 6;
-                    xpos = Math.floor((canvas.width - ghost.position.x) / 40)
-                    ypos = Math.floor((canvas.height - ghost.position.y) / 40)
+                    let ghostDir = inverseDir(ghost.direction)
+                    let xpos = canvas.width / 2, ypos = canvas.height / 2;
+                    xpos = roundNum(2 * xpos - ghost.position.x,dimension)/dimension - 1
+                    ypos = roundNum(2 * ypos - ghost.position.y,dimension)/dimension - 1                   
                     setTimeout(() => {
                         createGhost(ghost.color,xpos,ypos,ghostDir)
                     }, 3000)
@@ -162,6 +162,7 @@ function animate(){
                     y: 0,
                 }},
                 rectangle: boundary,
+                extra: 1
             })){
                 collisions.push('right')
             }
@@ -172,6 +173,7 @@ function animate(){
                     y: 0,
                 }},
                 rectangle: boundary,
+                extra: 1
             })){
                 collisions.push('left')
             }
@@ -182,6 +184,7 @@ function animate(){
                     y: -Ghost.speed,
                 }},
                 rectangle: boundary,
+                extra: 1
             })){
                 collisions.push('up')
             }
@@ -192,6 +195,7 @@ function animate(){
                     y: Ghost.speed,
                 }},
                 rectangle: boundary,
+                extra: 1
             })){
                 collisions.push('down')
             }
@@ -236,5 +240,16 @@ function animate(){
     else if(player.velocity.y < 0) player.rotation = Math.PI * 1.5
 }
 
-resetLevel(level)
-animate()
+startBtn.addEventListener("click", function(){
+    if(topicEl.value){
+        topic = topicEl.value
+        startCont.classList.remove("show")
+        resetLevel(level)
+        animate()
+    }else{
+        topicEl.classList.add("error")
+        setTimeout(() => {
+        topicEl.classList.remove("error")
+        }, "1000");
+    }
+})

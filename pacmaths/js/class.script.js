@@ -1,14 +1,90 @@
 class Boundary {
-    static width = 40
-    static height = Boundary.width
-    constructor({position, image}) {
+    constructor({position, dimension, sides}) {
         this.position = position
-        this.width = Boundary.width
-        this.height = Boundary.height
-        this.image = image
+        this.width = dimension
+        this.height = dimension
+        this.shadow = dimension * 0.1
+        this.sides = sides
     }
     draw(){
-        c.drawImage(this.image, this.position.x, this.position.y)
+        c.fillStyle = '#00000042';
+        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        // Draw the top this.shadow
+        if(this.sides.includes("T")){
+            c.fillStyle = '#a9a9a9';
+            c.beginPath();
+            c.moveTo(this.position.x, this.position.y);
+            c.lineTo(this.position.x + this.width, this.position.y);
+            if(this.sides.includes("R")){
+                c.lineTo(this.position.x + this.width - this.shadow, this.position.y + this.shadow);
+            }else{
+                c.lineTo(this.position.x + this.width + this.shadow, this.position.y + this.shadow);
+            }
+            if(this.sides.includes("L")){
+                c.lineTo(this.position.x + this.shadow, this.position.y + this.shadow);
+            }else{
+                c.lineTo(this.position.x - this.shadow, this.position.y + this.shadow);
+            }
+            c.closePath();
+            c.fill();
+        }
+        // Draw the right this.shadow
+        if(this.sides.includes("R")){
+            c.fillStyle = '#7f7f7f';
+            c.beginPath();
+            c.moveTo(this.position.x + this.width, this.position.y);
+            c.lineTo(this.position.x + this.width, this.position.y + this.height);
+            if(this.sides.includes("B")){
+                c.lineTo(this.position.x + this.width - this.shadow, this.position.y + this.height - this.shadow);
+            }else{
+                c.lineTo(this.position.x + this.width - this.shadow, this.position.y + this.height + this.shadow);
+            }
+            if(this.sides.includes("T")){
+                c.lineTo(this.position.x + this.width - this.shadow, this.position.y + this.shadow);
+            }else{
+                c.lineTo(this.position.x + this.width - this.shadow, this.position.y - this.shadow);
+            }
+            c.closePath();
+            c.fill();
+        }
+        // Draw the bottom this.shadow
+        if(this.sides.includes("B")){
+            c.fillStyle = '#7f7f7f';
+            c.beginPath();
+            c.moveTo(this.position.x, this.position.y + this.height);
+            c.lineTo(this.position.x + this.width, this.position.y + this.height);
+            if(this.sides.includes("R")){
+                c.lineTo(this.position.x + this.width - this.shadow, this.position.y + this.height - this.shadow);
+            }else{
+                c.lineTo(this.position.x + this.width + this.shadow, this.position.y + this.height - this.shadow);
+            }
+            if(this.sides.includes("L")){
+                c.lineTo(this.position.x + this.shadow, this.position.y + this.height - this.shadow);
+            }else{
+                c.lineTo(this.position.x - this.shadow, this.position.y + this.height - this.shadow);
+            }
+            c.closePath();
+            c.fill();
+        }
+        // Draw the left this.shadow
+        if(this.sides.includes("L")){
+            c.fillStyle = '#a9a9a9';
+            c.beginPath();
+            c.moveTo(this.position.x, this.position.y);
+            c.lineTo(this.position.x, this.position.y + this.height);
+            if(this.sides.includes("B")){
+                c.lineTo(this.position.x + this.shadow, this.position.y + this.height - this.shadow);
+            }else{
+                c.lineTo(this.position.x + this.shadow, this.position.y + this.height + this.shadow);
+            }
+            if(this.sides.includes("T")){
+                c.lineTo(this.position.x + this.shadow, this.position.y + this.shadow);
+            }else{
+                c.lineTo(this.position.x + this.shadow, this.position.y - this.shadow);
+            }
+            c.closePath();
+            c.fill();
+        }
     }
 }
 
@@ -17,7 +93,7 @@ class Player {
     constructor({position, velocity}){
         this.position = position
         this.velocity = velocity
-        this.radius = 15
+        this.radius = dimension * 0.3
         this.radians = 0.75
         this.openrate = 0.12
         this.rotation = 0
@@ -58,11 +134,12 @@ class Ghost {
     constructor({position, velocity, color}){
         this.position = position
         this.velocity = velocity
-        this.radius = 15
+        this.radius = dimension * 0.3
         this.color = color
         this.prevCollisions = []
         this.speed = 1
         this.scared = false
+        this.hidden = false
     }
     draw(){
         c.beginPath()
@@ -87,7 +164,7 @@ class Ghost {
 class Pellet {
     constructor({position}){
         this.position = position
-        this.radius = 3
+        this.radius = dimension * 0.1
     }
     draw(){
         c.beginPath()
@@ -98,7 +175,7 @@ class Pellet {
             0,
             Math.PI * 2
         )
-        c.fillStyle = 'White'
+        c.fillStyle = 'Black'
         c.fill()
         c.closePath()
     }
@@ -107,7 +184,7 @@ class Pellet {
 class PowerUp {
     constructor({position}){
         this.position = position
-        this.radius = 6
+        this.radius = dimension * 0.2
     }
     draw(){
         c.beginPath()
@@ -118,7 +195,7 @@ class PowerUp {
             0,
             Math.PI * 2
         )
-        c.fillStyle = 'White'
+        c.fillStyle = 'Black'
         c.fill()
         c.closePath()
     }
@@ -134,6 +211,10 @@ class Display {
     update(){
         this.hide()
         if(this.show) displayEl.classList.add('show')
+        if(this.size.height) displayEl.style.height = this.size.height + "px"
+            else displayEl.style.height = 13 * dimension + "px"
+        if(this.size.width) displayEl.style.width = this.size.width + "px"
+            else displayEl.style.width = 11 * dimension + "px"
         if(this.text.h1) displayEl.querySelector('h1').innerHTML = this.text.h1
         if(this.text.p) displayEl.querySelector('p').innerHTML = this.text.p
     }
@@ -141,7 +222,10 @@ class Display {
     question(){
         this.hide()
         if(this.show) questEl.classList.add('show')
-        if(this.size) questEl.classList.add(this.size)
+        if(this.size.height) questEl.style.height = this.size.height + "px"
+            else questEl.style.height = 13 * dimension + "px"
+        if(this.size.width) questEl.style.width = this.size.width + "px"
+            else questEl.style.width = 11 * dimension + "px"
         if(this.text.h1) questEl.querySelector('h1').innerHTML = this.text.h1
         if(this.text.p) questEl.querySelectorAll('p')[0].innerHTML = this.text.p
         if(this.text.q) questEl.querySelectorAll('p')[1].innerHTML = this.text.q
@@ -149,8 +233,11 @@ class Display {
 
     notice(){
         this.hide()
-        if(this.size) noticeEl.classList.add(this.size)
-        noticeEl.classList.add('show')
+        if(this.show) noticeEl.classList.add('show')
+        if(this.size.height) noticeEl.style.height = this.size.height + "px"
+            else noticeEl.style.height = 13 * dimension + "px"
+        if(this.size.width) noticeEl.style.width = this.size.width + "px"
+            else noticeEl.style.width = 9 * dimension + "px"
     }
 
     hide(){
