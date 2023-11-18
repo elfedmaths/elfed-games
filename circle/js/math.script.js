@@ -1,18 +1,21 @@
-let data = [], high = 0, coordArr;
+let data = [], high = 0, coordArr
 
 function math(){
-    data = [];
-    coordArr = fetchData();
-    lengthCheck();
-    data['complete'] = completePoly();
-    data['high'] = "High score: " + high + "%";
-    return data;
+    data = []
+    coordArr = fetchData()
+    if(lengthCheck()){
+        data['complete'] = completePoly()
+        data['high'] = "High score: " + high + "%"
+    }
+    return data
 }
 
 function lengthCheck(){
     if(coordArr.length < 100){
-        data['error'] = "Not enough data points";
+        data['error'] = "Not enough data points"
+        return false
     }
+    return true
 }
 
 function completePoly(){
