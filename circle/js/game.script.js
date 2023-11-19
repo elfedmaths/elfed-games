@@ -18,7 +18,7 @@ function start(event) {
     c.clearRect(0, 0, canvas.width, canvas.height)
     localStorage.removeItem('mouse-data')
     document.getElementById('error').innerHTML = ""
-    document.getElementById('complete-stat').innerHTML = "0.00%"
+    document.getElementById('complete-stat').innerHTML = "Complete: 0.00%"
     coords = [], coord = {x: 0, y: 0}, score = 0, error = ""
     color = randColor()
     reposition(event)
@@ -53,9 +53,9 @@ function stop() {
 function showData(){
     if(error){
         document.getElementById('error').innerHTML = error
-        document.getElementById('complete-stat').innerHTML = "0.00%"
+        document.getElementById('complete-stat').innerHTML = "Complete: 0.00%"
     }else{
-        document.getElementById('complete-stat').innerHTML = score.toFixed(2) + "%"
+        document.getElementById('complete-stat').innerHTML = "Complete: " + score.toFixed(2) + "%"
     }
     if(highScore > 0){
         document.getElementById('high-score').innerHTML = "High score: " + highScore.toFixed(2) + "%"
