@@ -1,103 +1,72 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-let coord = { x: 0, y: 0 };
-let color = '#ACD3ED';
+const canvas = document.getElementById('canvas')
+const c = canvas.getContext('2d')
+let coords = [], coord = {x: 0, y: 0}, error, highScore = 0, score = 0, color = '#ACD3ED'
 
-document.addEventListener('mousedown', start);
-document.addEventListener('mouseup', stop);
-document.body.addEventListener('touchstart', start);
-document.body.addEventListener('touchend', stop);
-window.addEventListener('resize', resize);
-
+window.addEventListener('resize', resize)
 function resize() {
-    ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight;
+    c.canvas.width = window.innerWidth
+    c.canvas.height = window.innerHeight
 }
-  
-resize();
+resize()
+
+canvas.addEventListener('mousedown', start)
+canvas.addEventListener('touchstart', start)
+canvas.addEventListener('mouseup', stop)
+canvas.addEventListener('touchend', stop)
 
 function start(event) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    clearData();
-    document.addEventListener('mousemove', draw);
-    document.addEventListener('touchmove', draw);
-    reposition(event);
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    localStorage.removeItem('mouse-data')
+    document.getElementById('error').innerHTML = ""
+    document.getElementById('complete-stat').innerHTML = "0.00%"
+    coords = [], coord = {x: 0, y: 0}, score = 0, error = ""
+    color = randColor()
+    reposition(event)
+    canvas.addEventListener('mousemove', draw)
+    canvas.addEventListener('touchmove', draw)
 }
 
 function reposition(event) {
-    coord.x = event.clientX - canvas.offsetLeft;
-    coord.y = event.clientY - canvas.offsetTop;
-    addData(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-}
-
-function stop() {
-    document.removeEventListener('mousemove', draw);
-    document.removeEventListener('touchmove', draw);
-    var data = math();
-    showData(data);
+    coord.x = event.clientX - canvas.offsetLeft
+    coord.y = event.clientY - canvas.offsetTop
+    coords.push({x:coord.x, y:coord.y})
 }
 
 function draw(event) {
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = color;
-    ctx.moveTo(coord.x, coord.y);
-    reposition(event);
-    ctx.lineTo(coord.x, coord.y);
-    ctx.stroke();
+    c.beginPath()
+    c.lineWidth = 5
+    c.lineCap = 'round'
+    c.strokeStyle = color
+    c.moveTo(coord.x, coord.y)
+    reposition(event)
+    c.lineTo(coord.x, coord.y)
+    c.stroke()
 }
 
-function addData(x, y){
-    if (localStorage.getItem('mouse-data') === null) {
-        var data = [];
+function stop() {
+    canvas.removeEventListener('mousemove', draw)
+    canvas.removeEventListener('touchmove', draw)
+    processMath() 
+    showData()
+}
+
+function showData(){
+    if(error){
+        document.getElementById('error').innerHTML = error
+        document.getElementById('complete-stat').innerHTML = "0.00%"
     }else{
-        var data = JSON.parse(localStorage.getItem('mouse-data'));
+        document.getElementById('complete-stat').innerHTML = score.toFixed(2) + "%"
     }
-    data.push([x, y]);
-    try {
-        localStorage['mouse-data'] = JSON.stringify(data);
-    } catch (e) {
-        alert("Error when writing to Local Storage\n" + e);
+    if(highScore > 0){
+        document.getElementById('high-score').innerHTML = "High score: " + highScore.toFixed(2) + "%"
     }
-}
-
-function clearData(){
-    localStorage.removeItem('mouse-data');
-    resetData();
-}
-
-function fetchData(){
-    if (localStorage.getItem('mouse-data') === null) {
-        var data = [];
-    }else{
-        var data = JSON.parse(localStorage.getItem('mouse-data'));
-    }
-    return data;
-}
-
-function showData(data){
-    if(data['error']){
-        document.getElementById('error').innerHTML = data['error'];
-    }else{
-        if(data['complete']){
-            document.getElementById('complete-stat').innerHTML = data['complete'];
-            document.getElementById('high-score').innerHTML = data['high'];
-        }
-    }
-}
-
-function resetData(){
-    document.getElementById('error').innerHTML = "";
-    document.getElementById('complete-stat').innerHTML = "0%";
-    color = randColor();
 }
 
 function randColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
+    var letters = '0123456789ABCDEF'
+    var color = '#'
     for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+        color += letters[Math.floor(Math.random() * 16)]
     }
-    return color;
-  }
+    return color
+}
