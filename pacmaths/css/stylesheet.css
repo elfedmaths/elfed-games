@@ -68,7 +68,6 @@ canvas{
     width: 100%;
     height: 100%;
     justify-content: center;
-    z-index: 3;
 }
 
 #display-box.show{
@@ -85,6 +84,7 @@ canvas{
     padding: 10px;
     width: 0;
     height: 0;
+    z-index: 3;
 }
 
 #error-box{
@@ -97,6 +97,7 @@ canvas{
     padding: 10px;
     width: 100%;
     height: 120px;
+    z-index: 3;
 }
 
 #error-box div{
@@ -142,6 +143,7 @@ canvas{
     flex-direction: column;
     justify-content: center;
     padding: 10px;
+    z-index: 3;
 }
 
 #notice-box{
@@ -150,6 +152,7 @@ canvas{
 
 #question-box{
     height: 280px;
+    z-index: 3;
 }
 
 #question-box input{
@@ -282,7 +285,6 @@ canvas{
     background-color: var(--main-back);
     box-shadow: 0 1px 5px var(--main-shadow);
     cursor: pointer;
-    z-index: 2;
 }
 
 .corner-menu .corner-btn img{
@@ -292,7 +294,6 @@ canvas{
     margin: 10px;
     position: relative;
     cursor: pointer;
-    z-index: 1;
 }
 
 .corner-menu .corner-btn:hover img{
@@ -346,5 +347,5 @@ canvas{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    z-index: 1;
+    z-index: 2;
 }
