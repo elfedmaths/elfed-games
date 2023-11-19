@@ -67,21 +67,21 @@ navCont.addEventListener('touchend', function () {
         if (deltaX > 0) {
             keys.right.pressed = true
             lastKey = 'ArrowRight'
-            setTimeout(() => {keys.right.pressed = false}, 1)
+            setTimeout(() => {keys.right.pressed = false}, 10)
         } else {
             keys.left.pressed = true
             lastKey = 'ArrowLeft'
-            setTimeout(() => {keys.left.pressed = false}, 1)
+            setTimeout(() => {keys.left.pressed = false}, 10)
         }
     } else {
         if (deltaY > 0) {
             keys.down.pressed = true
             lastKey = 'ArrowDown'
-            setTimeout(() => {keys.down.pressed = false}, 1)
+            setTimeout(() => {keys.down.pressed = false}, 10)
         } else {
             keys.up.pressed = true
             lastKey = 'ArrowUp'
-            setTimeout(() => {keys.up.pressed = false}, 1)
+            setTimeout(() => {keys.up.pressed = false}, 10)
         }
     }
   });
