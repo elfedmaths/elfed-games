@@ -2,7 +2,9 @@ let cWidth, cHeight, minX, maxX, minY, maxY, centerX, centerY, radius, perc = []
 
 function processMath(){
     if(!lengthCheck()) return false
-    if(!crossCheck()) return false
+    if(!closeCheck()){
+        if(!crossCheck()) return false
+    }
     if(!lengthCheck()) return false
     completePoly()
     return true
@@ -23,6 +25,13 @@ function lengthCheck(){
         return false
     }
     return true
+}
+
+function closeCheck(){
+    if(Math.abs(coords[0].x - coords[coords.length-1].x) < 20
+        && Math.abs(coords[0].y - coords[coords.length-1].y) < 20
+    ) return true
+    return false
 }
 
 function crossCheck(){
@@ -113,19 +122,4 @@ function calculateAverage(array) {
     const sum = array.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
     const average = sum / array.length
     return average;
-}
-
-function oldFormula(){
-    let start = coords[0];
-    let currScore = 100;
-    for (let i = coords.length - 1; i > coords.length / 2; i--) {
-        let end = coords[i];
-        let distance = Math.sqrt(Math.pow((end.x - start.x),2) + Math.pow((end.y - start.y),2));
-        if(distance < currScore){
-            currScore = distance;
-        }
-    }
-    score = 100 - currScore;
-    if(score > highScore) highScore = score
-    return true
 }
