@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/resetstyle.css">
     <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="./js/input.script.js" defer></script>
+    <script src="./js/keys.script.js" defer></script>
     <script src="./js/index.script.js" defer></script>
     <meta name="description" content="JS Maths Logic Game">
 </head>
@@ -17,16 +19,41 @@
     </div>
     <div id="main">
         <div id="main-column">
-            <div id="main-row">
-                <input id="submitted" type="checkbox" tabindex="-1">
-                <form>
-                    <input type="number" min="0" max="9" maxlength="1" placeholder=" " id="n1" oninput="this.nextElementSibling.focus()" autofocus>
-                    <input type="number" min="0" max="9" maxlength="1" placeholder=" " oninput="this.nextElementSibling.focus()" id="n2">
-                    <input type="number" min="0" max="9" maxlength="1" placeholder=" " oninput="this.nextElementSibling.focus()" id="n3">
-                    <input type="number" min="0" max="9" maxlength="1" placeholder=" " oninput="this.nextElementSibling.focus()" id="n4">
-                    <label class="submit" type="button" tabindex="0" for="submitted" onkeypress="document.getElementById('submitted').checked='true'"></label>
-                	<span class="indicator"></span>
-                </form>
+            <div class="main-row active">
+                <div class="input-row">
+                    <span class="input n1 focus"></span>    
+                    <span class="input n2"></span>    
+                    <span class="input n3"></span>    
+                    <span class="input n4"></span>    
+                </div>
+                <div class="response-row">
+                    <span class="response r1"></span>
+                    <span class="response r2"></span>
+                    <span class="response r3"></span>
+                    <span class="response r4"></span>
+                </div>
+            </div>
+        </div>
+        <div id="main-buttons">
+            <div class="button-row">
+                <span class="button">1</span>
+                <span class="button">2</span>
+                <span class="button">3</span>
+            </div>
+            <div class="button-row">
+                <span class="button">4</span>
+                <span class="button">5</span>
+                <span class="button">6</span>
+            </div>
+            <div class="button-row">
+                <span class="button">7</span>
+                <span class="button">8</span>
+                <span class="button">9</span>
+            </div>
+            <div class="button-row">
+                <span class="button">&lt;</span>
+                <span class="button">&check;</span>
+                <span class="button">&gt;</span>
             </div>
         </div>
     </div>

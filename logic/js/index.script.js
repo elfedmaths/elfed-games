@@ -1,62 +1,52 @@
-// Mastermind Game in JavaScript
+let code = '', exact = 0, partial = 0
 
-// Function to generate a random secret code
-function generateSecretCode() {
-    const colors = ['R', 'G', 'B', 'Y']; // You can add more colors if desired
-    let secretCode = '';
-    for (let i = 0; i < 4; i++) {
-      const randomIndex = Math.floor(Math.random() * colors.length);
-      secretCode += colors[randomIndex];
-    }
-    return secretCode;
+function randomInt(min,max){
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function genCode() {
+  for (let i = 0; i < 4; i++) {
+    code += randomInt(1,9)
   }
+}
   
-  // Function to compare the guess with the secret code
-  function evaluateGuess(secretCode, guess) {
-    let exactMatches = 0;
-    let partialMatches = 0;
-  
-    for (let i = 0; i < secretCode.length; i++) {
-      if (guess[i] === secretCode[i]) {
-        exactMatches++;
-      } else if (secretCode.includes(guess[i])) {
-        partialMatches++;
-      }
-    }
-  
-    return { exactMatches, partialMatches };
+function evaluate(guess) {
+  exact = 0
+  partial = 0
+  for (let i = 0; i < code.length; i++) {
+    if (guess[i] === code[i]) exact++
+    else if (code.includes(guess[i])) partial++
   }
-  
-  // Function to play the Mastermind game
-  function playMastermind() {
-    const secretCode = generateSecretCode();
-    let attempts = 0;
-  
-    console.log('Welcome to Mastermind! Try to guess the 4-color secret code.');
-  
-    while (attempts < 10) {
-      const guess = prompt('Enter your guess (e.g., RGBY):').toUpperCase();
-  
-      if (guess.length !== 4 || !/^[RGBY]+$/.test(guess)) {
-        console.log('Invalid input. Please enter a 4-color code using the letters R, G, B, Y.');
-        continue;
-      }
-  
-      const result = evaluateGuess(secretCode, guess);
-  
-      console.log(`Result: ${result.exactMatches} exact matches, ${result.partialMatches} partial matches.`);
-  
-      if (result.exactMatches === 4) {
-        console.log(`Congratulations! You guessed the secret code ${secretCode} in ${attempts + 1} attempts.`);
-        return;
-      }
-  
-      attempts++;
-    }
-  
-    console.log(`Sorry, you've run out of attempts. The secret code was ${secretCode}.`);
+  showResponse()
+  if(exact !== 4) newRow()
+}
+
+function showResponse(){
+  var activeRow = document.querySelector('.main-row.active')
+  var responses = activeRow.querySelectorAll('.response')
+  let responseArr = []
+  if(exact > 0){
+    for(i = 1; i <= exact; i++) responseArr.push('exact')
   }
-  
-  // Start the game
-  //playMastermind();
+  if(partial > 0){
+    for(i = 1; i <= partial; i++) responseArr.push('partial')
+  }
+  responseArr.forEach((responseVal,i) => {
+    responses[i].classList.add(responseVal)
+  });
+}
+
+function submit(){
+  var activeRow = document.querySelector('.main-row.active')
+  var n1 = activeRow.querySelector('.n1').innerHTML
+  var n2 = activeRow.querySelector('.n2').innerHTML
+  var n3 = activeRow.querySelector('.n3').innerHTML
+  var n4 = activeRow.querySelector('.n4').innerHTML
+  var guess = "" + n1 + n2 + n3 + n4
+  if(guess.length === 4){
+    evaluate(guess)
+  }
+}
+
+genCode()
   
