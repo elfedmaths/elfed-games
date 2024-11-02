@@ -1,1 +1,1 @@
-# maths-pacman
+# Elfed Maths Games
