@@ -1,0 +1,229 @@
+:root{
+    --background: #ffffff;
+    --font: #000000;
+    --border: #000000;
+    --shadow: #6b6b6b;
+}
+
+*{
+    box-sizing: border-box;
+    cursor: default;
+    user-select: none;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    margin: 0;
+    padding: 1em;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    background-color: var(--background);
+    color: var(--font);
+    font-size: 16px;
+}
+
+/* Stats */
+
+#title h1{
+    flex: 0 0 2em;
+    margin: auto;
+    font-size: 1.5em;
+}
+
+/* -------------------- */
+
+/* Main */
+
+#main{
+    flex: 1 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1em;
+
+    #main-game{
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+    
+        #hangmanCanvas {
+            width: 100%;
+            flex: 1 1;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+    }
+    
+    #main-buttons{
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+    
+        #input-container{
+            flex: 1 1;
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-items: center;
+            gap: 1em;
+    
+            .input{
+                flex: 1;
+                height: 3em;
+                padding: 0.2em;
+                border-radius: 0.5em;
+                box-shadow: 0px 0px 0.5em var(--shadow);
+                font-size: 3em;    
+                background-color: var(--background);
+                opacity: 100%;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-content: center;
+            }
+
+            .input.focus{
+                border: 0.1em solid var(--border);
+            }
+
+            .input.correct{
+                border: 0.1em solid green;
+            }
+        }
+    
+        #button-container{
+            flex: 2 2;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-items: center;
+            gap: 0.3em;
+
+            .button-row{
+                flex: 1 1;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: center;
+                gap: 0.3em;
+    
+                .button{
+                    flex: 1 1;
+                    height: 100%;
+                    padding: 0.2em;
+                    border: 0.025em solid var(--border);
+                    border-radius: 0.3em;
+                    box-shadow: 0px 0px 0.3em var(--shadow);
+                    font-size: 2em;    
+                    background-color: var(--background);
+                    opacity: 100%;
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-content: center;
+                }
+    
+                .button.click{
+                    box-shadow: 0 0 0.5em 0.3em var(--shadow);
+                    border: 0.05em solid var(--border);
+                }
+            }
+        }
+
+        #clues{
+            flex: 0 0 10em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5em;
+
+            span{
+                height: 1em;
+                font-size: 0.8em;
+            }
+        }
+    }
+}
+
+/* -------------------- */
+
+/* Corner Menu */
+
+.corner-menu {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+
+    .corner-btn{
+        flex: 0 0;
+        width: 50px;
+        height: 50px;
+        margin: 0 10px;
+        border-radius: 10px;
+        background-color: var(--background);
+        box-shadow: 0 1px 5px var(--border);
+        cursor: pointer;
+        z-index: 2;
+
+        img{
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1;
+        }
+    }
+
+    .corner-btn:hover img{
+        animation: pulse 2s linear infinite;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* -------------------- */
+
+#footer{
+    font-size: 12px;
+    text-align: left;
+    padding-left: 10px;
+    cursor: context-menu;
+    position: fixed;
+    bottom: 5px;
+    left: 0px;
+}
+
+/* -------------------- */

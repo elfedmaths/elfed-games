@@ -13,20 +13,16 @@ function keypadClick(e){
         e.target.classList.remove('click')
     }, 100)
     let key = e.target.innerHTML
-    console.log(key)
     switch(key){
-        case '&gt;':
-            moveRight()
-            break
-        case '&lt;':
-            moveLeft()
+        case 'X':
+            resetInputs()
             break
         case '✓':
             submit()
             break
         default:
             if(document.activeElement !== document.querySelector(".input") &&
-                /(^[1-9]$)/.test(key)){
+                /(^[0-9]$)/.test(key)){
                     enterNum(key)
             }
             break

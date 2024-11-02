@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hangmaths</title>
+	<meta name="author" content="M. Massey">
+	<meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+    <meta name="description" content="JS Maths Logic Game">
+    <meta name="keywords" content="Maths, Elfed, Elfed High, Elfed High School, Elfed Maths, Maths Logic, Game">
+    <meta name="subject" content="Elfed Maths - Hangmaths">
+    <meta name="robots" content="noindex, nofollow, nositelinkssearchbox, notranslate">
+    <meta name="rating" content="General">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="./css/resetstyle.css">
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="./js/index.script.js" defer></script>
+    <script src="./js/keys.script.js" defer></script>
+    <script src="./js/input.script.js" defer></script>
+    <script src="./js/canvas.script.js" defer></script>
+</head>
+<body>
+    <div id="title">
+        <h1>Hangmaths</h1>
+    </div>
+    <div id="main">
+        <div id="main-game">
+            <canvas id="hangmanCanvas" width="400" height="400"></canvas>
+        </div>
+        <div id="main-buttons">
+            <div id="input-container">
+                <span class="input focus"></span>
+                <span class="input"></span>
+                <span class="input"></span>
+            </div>
+            <div id="button-container">
+                <div class="button-row">
+                    <span class="button">1</span>
+                    <span class="button">2</span>
+                    <span class="button">3</span>
+                </div>
+                <div class="button-row">
+                    <span class="button">4</span>
+                    <span class="button">5</span>
+                    <span class="button">6</span>
+                </div>
+                <div class="button-row">
+                    <span class="button">7</span>
+                    <span class="button">8</span>
+                    <span class="button">9</span>
+                </div>
+                <div class="button-row">
+                    <span class="button">X</span>
+                    <span class="button">0</span>
+                    <span class="button">&check;</span>
+                </div>
+            </div>
+            <div id="clues"></div>
+        </div>
+    </div>
+    <div class="corner-menu">
+        <div class="corner-btn pulse-btn" id="home-btn">
+            <a href="../"><img src="./img/home-icon.svg" alt="Home"></a>
+        </div>
+    </div>
+    <div id="footer">
+        <p>Copyright &copy; 2024 -  <script>document.write(new Date().getFullYear())</script>, M. Massey.</p>
+    </div>
+</body>
+</html>
