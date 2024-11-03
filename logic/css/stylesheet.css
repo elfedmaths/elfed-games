@@ -1,13 +1,17 @@
 :root{
-    --background: #ffffff;
-    --font: #000000;
-    --border: #000000;
-    --shadow: #6b6b6b;
+    --main-back: #ffffff;
+    --main-font: #000000;
+    --main-border: #000000;
+    --main-shadow: #6b6b6b;
+    --scroll-back: #ffffff;
+    --scroll-main: #ececec;
+    --scroll-hover: #cfcfcf;
 }
 
 *{
     box-sizing: border-box;
     cursor: default;
+    user-select: none;
 }
 
 body{
@@ -16,54 +20,253 @@ body{
     text-align: center;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    background-color: var(--background);
-    color: var(--font);
+    background-color: var(--main-back);
+    color: var(--main-font);
     font-size: 12px;
 }
 
-/* -------------------- */
+#header {
+    flex: 0 0;
+    width: 100vw;
 
-/* Corner Menu */
+    h1{
+        margin: 0.5em auto;
+        font-size: 2em;
+        text-decoration: none;
+        cursor: context-menu;
+        color: var(--main-font);
+    }
+
+    h1:before, h1:after {
+        content: "";
+        display: inline-block;
+        width: 10%;
+        margin: 0 0.5em 0 -55%;
+        vertical-align: middle;
+        border-bottom: 0.1em solid var(--main-font);
+    }
+
+    h1:after {
+        margin: 0 -55% 0 0.5em;
+    }
+}
+
+#main{
+    flex: 1 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    padding: 1em;
+    gap: 2em;
+
+    #main-game{
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+
+        .main-row{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            .input-row{
+                flex: 1 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+
+                .input{
+                    width: 30px;
+                    height: 40px;
+                    padding: 5px;
+                    margin: 5px;
+                    border: 1px solid var(--main-border);
+                    border-radius: 5px;
+                    box-shadow: 0px 0px 3px var(--main-shadow);
+                    font-size: 30px;
+                    background-color: var(--main-shadow);
+                    opacity: 20%;
+                }
+
+                .input.focus{
+                    animation: shadow 1s alternate infinite;
+                }
+            }
+
+            .response-row{
+                flex: 1 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+
+                .response{
+                    width: 20px;
+                    height: 20px;
+                    margin: 5px;
+                    background-color: var(--main-shadow);
+                    border: 1px solid var(--main-border);
+                    border-radius: 10px;
+                    box-shadow: 0px 0px 5px var(--main-shadow);
+                }
+
+                .response.partial{
+                    background-color: #ff910060;
+                    border: 1px solid #ff9100;
+                    box-shadow: 0px 0px 5px #ff9100;
+                }
+
+                .response.exact{
+                    background-color: #00ff2a60;
+                    border: 1px solid #00ff2a;
+                    box-shadow: 0px 0px 5px #00ff2a;
+                }
+            }
+        }
+
+        .main-row.active .input-row .input{
+            width: 30px;
+            height: 40px;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid var(--main-border);
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px var(--main-shadow);
+            font-size: 30px;    
+            background-color: var(--main-back);
+            opacity: 100%;
+            cursor: pointer;
+        }
+    }
+
+    #main-buttons{
+        flex: 0 0;
+        width: 80%;
+        max-width: 20em;
+        margin-bottom: 1em;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0.3em;
+
+        .button-row{
+            flex: 1 1;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            gap: 0.3em;
+
+            .button{
+                flex: 1 1;
+                height: 100%;
+                padding: 0.2em;
+                border: 0.025em solid var(--main-border);
+                border-radius: 0.3em;
+                box-shadow: 0px 0px 0.3em var(--main-shadow);
+                font-size: 2em;    
+                background-color: var(--main-back);
+                opacity: 100%;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-content: center;
+            }
+
+            .button.click{
+                box-shadow: 0 0 0.5em 0.3em var(--main-shadow);
+                border: 0.05em solid var(--main-border);
+            }
+        }
+    }
+}
 
 .corner-menu {
+    font-size: 12px;
     position: fixed;
-    right: 10px;
-    bottom: 10px;
-    height: 50px;
+    right: 1em;
+    bottom: 1em;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-end;
+
+    .corner-btn{
+        flex: 0 0;
+        width: 5em;
+        height: 5em;
+        padding: 1em;
+        border-radius: 1em;
+        background-color: var(--main-back);
+        box-shadow: 0 0.1em 0.5em var(--main-shadow);
+        cursor: pointer;
+        z-index: 2;
+
+        img{
+            display: block;
+            width: 3em;
+            height: 3em;
+            position: relative;
+            cursor: pointer;
+            z-index: 1;
+        }
+    }
+
+    .pulse-btn:hover img{
+        animation: pulse 2s linear infinite;
+    }
 }
 
-.corner-menu .corner-btn{
-    flex: 0 0;
-    width: 50px;
-    height: 50px;
-    margin: 0 10px;
-    border-radius: 10px;
-    background-color: var(--background);
-    box-shadow: 0 1px 5px var(--border);
-    cursor: pointer;
-    z-index: 2;
+#footer{
+    position: fixed;
+    left: 0.5em;
+    bottom: 0.2em;
+    font-size: 12px;
+    text-align: left;
+    cursor: context-menu;
+
+    p{
+        margin: 0;
+    }
 }
 
-.corner-menu .corner-btn img{
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin: 10px;
-    position: relative;
-    cursor: pointer;
-    z-index: 1;
+::-webkit-scrollbar-track{
+	background-color: var(--scroll-back);
 }
 
-.corner-menu .corner-btn:hover img{
-    animation: pulse 2s linear infinite;
+::-webkit-scrollbar{
+	width: 10px;
+    height: 10px;
+	background-color: var(--scroll-back);
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: var(--scroll-main);
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+  background-color: var(--scroll-hover);
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+  background-color: var(--scroll-hover);
+  cursor: pointer;
 }
 
 @keyframes pulse {
@@ -72,183 +275,11 @@ body{
     100% { transform: scale(1); }
 }
 
-/* -------------------- */
-
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--background);
-}
-  
-::-webkit-scrollbar-thumb {
-    background: #888;
-}
-  
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* -------------------- */
-
-#footer{
-    font-size: 12px;
-    text-align: left;
-    padding-left: 10px;
-    cursor: context-menu;
-    position: fixed;
-    bottom: 5px;
-    left: 0px;
-}
-
-/* -------------------- */
-
-/* Stats */
-
-#stats{
-    position: fixed;
-    left: 5px;
-    top: 5px;
-    font-size: 18px;
-    text-align: left;
-    cursor: context-menu;
-}
-
-#stats h1{
-    font-size: 24px;
-}
-
-/* -------------------- */
-
-/* Main */
-
-#main{
-    width: 100vw;
-    height: calc(100% - 120px);
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-
-#main-column{
-    height: calc(100% - 120px);
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    margin-bottom: 50px;
-}
-
-#main-column .main-row{
-    width: 100%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-#main-column .main-row .input-row{
-    flex: 1 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-#main-column .main-row .input-row .input{
-    width: 30px;
-    height: 40px;
-    padding: 5px;
-    margin: 5px;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    box-shadow: 0px 0px 3px var(--shadow);
-    font-size: 30px;
-    background-color: var(--shadow);
-    opacity: 20%;
-}
-
-#main-column .main-row.active .input-row .input{
-    width: 30px;
-    height: 40px;
-    padding: 5px;
-    margin: 5px;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px var(--shadow);
-    font-size: 30px;    
-    background-color: var(--background);
-    opacity: 100%;
-    cursor: pointer;
-}
-
-#main-column .main-row .input-row .input.focus{
-    animation: shadow 1s alternate infinite;
-}
-
 @keyframes shadow{
     0%{
-        box-shadow: 0px 0px 5px var(--shadow);
+        box-shadow: 0px 0px 5px var(--main-shadow);
     }
     100%{
-        box-shadow: 0px 0px 5px 3px var(--shadow);
+        box-shadow: 0px 0px 5px 3px var(--main-shadow);
     }
-}
-
-#main-column .main-row .response-row{
-    flex: 1 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-#main-column .main-row .response-row .response{
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-    background-color: var(--shadow);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px var(--shadow);
-}
-
-#main-column .main-row .response-row .response.partial{
-    background-color: #ff910060;
-    border: 1px solid #ff9100;
-    box-shadow: 0px 0px 5px #ff9100;
-}
-
-#main-column .main-row .response-row .response.exact{
-    background-color: #00ff2a60;
-    border: 1px solid #00ff2a;
-    box-shadow: 0px 0px 5px #00ff2a;
-}
-
-#main-buttons{
-    height: 120px;
-}
-
-#main-buttons .button-row{
-    display: flex;
-    justify-content: center;
-}
-
-#main-buttons .button-row .button{
-    width: 20px;
-    height: 20px;
-    padding: 2px;
-    margin: 5px;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px var(--shadow);
-    font-size: 15px;    
-    background-color: var(--background);
-    opacity: 100%;
-    cursor: pointer;
-}
-
-#main-buttons .button-row .button.click{
-    box-shadow: 0px 0px 5px 3px var(--shadow);
 }

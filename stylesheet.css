@@ -1,25 +1,18 @@
-/* -------------------- */
-
 :root{
     --main-back: #ffffff;
     --main-font: #000000;
     --main-border: #000000;
     --main-shadow: #00000080;
-
     --disabled-font: #b4b4b4;
-
     --scroll-back: #ffffff;
     --scroll-main: #ececec;
     --scroll-hover: #cfcfcf;
 }
 
-/* -------------------- */
-
-/* Main Structure */
-
 *{
     box-sizing: border-box;
     cursor: default;
+    user-select: none;
 }
 
 body{
@@ -37,22 +30,143 @@ body{
     font-size: 12px;
 }
 
+#header {
+    flex: 0 0;
+    width: 100vw;
+
+    h1{
+        margin: 0.5em auto;
+        font-size: 2em;
+        text-decoration: none;
+        cursor: context-menu;
+        color: var(--main-font);
+    }
+
+    h1:before, h1:after {
+        content: "";
+        display: inline-block;
+        width: 10%;
+        margin: 0 0.5em 0 -55%;
+        vertical-align: middle;
+        border-bottom: 0.1em solid var(--main-font);
+    }
+
+    h1:after {
+        margin: 0 -55% 0 0.5em;
+    }
+}
+
+#main{
+    flex: 1 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+    gap: 1em;
+    padding: 1em 1em 2em 1em;
+
+    .content-box{
+        flex: 1 1 300px;
+        height: 300px;
+        padding: 1em;
+        text-decoration: none;
+        box-shadow: 0 0.1em 0.5em var(--main-shadow);
+        overflow: hidden;
+        border-radius: 0.5em;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        color: var(--main-font);
+
+        h1{
+            color: var(--main-font);
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        p{
+            color: var(--main-font);
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        img{
+            height: 60%;
+            cursor: pointer;
+        }
+    }
+
+    .content-box.disabled{
+        cursor: default;
+
+        h1, p{
+            color: var(--disabled-font);
+            cursor: default;
+        }
+
+        img{
+            filter: opacity(50%);
+        }
+    }
+
+    .content-box:not(.disabled):hover img{
+        animation: wobble 1s linear infinite;
+    }
+}
+
+.corner-menu {
+    font-size: 12px;
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+
+    .corner-btn{
+        flex: 0 0;
+        width: 5em;
+        height: 5em;
+        padding: 1em;
+        border-radius: 1em;
+        background-color: var(--main-back);
+        box-shadow: 0 0.1em 0.5em var(--main-shadow);
+        cursor: pointer;
+        z-index: 2;
+
+        img{
+            display: block;
+            width: 3em;
+            height: 3em;
+            position: relative;
+            cursor: pointer;
+            z-index: 1;
+        }
+    }
+
+    .pulse-btn:hover img{
+        animation: pulse 2s linear infinite;
+    }
+}
+
 #footer{
     position: fixed;
-    left: 5px;
-    bottom: 2px;
+    left: 0.5em;
+    bottom: 0.2em;
     font-size: 12px;
     text-align: left;
     cursor: context-menu;
+
+    p{
+        margin: 0;
+    }
 }
-
-#footer p{
-    margin: 0;
-}
-
-/* -------------------- */
-
-/* Scroll Bar */
 
 ::-webkit-scrollbar-track{
 	background-color: var(--scroll-back);
@@ -77,147 +191,6 @@ body{
   background-color: var(--scroll-hover);
   cursor: pointer;
 }
-
-/* -------------------- */
-
-/* Header */
-
-#header {
-    width: 100vw;
-}
-
-#header h1{
-    margin: 15px auto;
-    font-size: 20px;
-    text-decoration: none;
-    cursor: context-menu;
-    color: var(--main-font);
-}
-
-#header h1:before, #header h1:after {
-    content: "";
-    display: inline-block;
-    width: 10%;
-    margin: 0 .5em 0 -55%;
-    vertical-align: middle;
-    border-bottom: 1px solid var(--main-font);
-}
-
-#header h1:after {
-    margin: 0 -55% 0 .5em;
-}
-
-/* -------------------- */
-
-/* Content */
-
-#main{
-    flex: 1 1;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-    justify-content: space-evenly;
-    margin: 0px 20px;
-}
-
-#main .content-box{
-    flex: 1 1 300px;
-    height: 300px;
-    margin: 10px;
-    padding: 10px;
-    text-decoration: none;
-    box-shadow: 0 1px 5px var(--main-shadow);
-    overflow: hidden;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: var(--main-font);
-}
-
-#main .content-box h1{
-    color: var(--main-font);
-    font-size: 24px;
-    cursor: pointer;
-}
-
-#main .content-box p{
-    color: var(--main-font);
-    font-size: 12px;
-    cursor: pointer;
-}
-
-#main .content-box.disabled h1, #main .content-box.disabled p{
-    color: var(--disabled-font);
-}
-
-#main .content-box.disabled img{
-    filter: opacity(50%);
-}
-
-#main .content-box img{
-    height: 60%;
-    cursor: pointer;
-}
-
-#main .content-box:not(.disabled):hover h1,
-#main .content-box:not(.disabled):hover p{
-    animation: pulse 1s linear infinite;
-}
-
-#main .content-box:not(.disabled):hover img{
-    animation: wobble 1s linear infinite;
-}
-
-/* -------------------- */
-
-/* Corner Button */
-
-.corner-menu {
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-}
-
-.corner-menu .corner-btn{
-    flex: 0 0;
-    width: 50px;
-    height: 50px;
-    margin: 0 10px;
-    border-radius: 10px;
-    background-color: var(--main-back);
-    box-shadow: 0 1px 5px var(--main-shadow);
-    cursor: pointer;
-    z-index: 2;
-}
-
-.corner-menu .corner-btn img{
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin: 10px;
-    position: relative;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.pulse-btn:hover img{
-    animation: pulse 2s linear infinite;
-}
-
-/* -------------------- */
-
-/* Keyframes */
 
 @keyframes pulse {
     0% { transform: scale(1); }

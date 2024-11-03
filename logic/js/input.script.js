@@ -80,36 +80,39 @@ function enterNum(num){
 }
 
 function newRow(){
-    let mainCol = document.querySelector('#main-column')
+    let mainCol = document.querySelector('#main-game')
     let activeRow = mainCol.querySelector('.main-row.active')
-    let div = document.createElement('div')
-    div.innerHTML = `<div class="input-row">
-        <span class="input n1 focus"></span>    
-        <span class="input n2"></span>    
-        <span class="input n3"></span>    
-        <span class="input n4"></span>    
-    </div>
-    <div class="response-row">
-        <span class="response r1"></span>
-        <span class="response r2"></span>
-        <span class="response r3"></span>
-        <span class="response r4"></span>
-    </div>`
-    div.setAttribute('class', 'main-row active')
-    mainCol.append(div)
+    let row = document.createElement('div')
+        row.classList.add('main-row','active')
+    let inputRow = document.createElement('div')
+        inputRow.classList.add('input-row')
+    let responseRow = document.createElement('div')
+        responseRow.classList.add('response-row')
+    for (let i = 1; i <= 4; i++) {
+        let inputSpan = document.createElement('span')
+            inputSpan.classList.add(`input`, `n${i}`)
+        if(i === 1) inputSpan.classList.add(`focus`)
+        inputRow.appendChild(inputSpan)
+        let responseSpan = document.createElement('span')
+            responseSpan.classList.add(`response`,`n${i}`)
+        responseRow.appendChild(responseSpan)
+    }
+    row.appendChild(inputRow)
+    row.appendChild(responseRow)
+    mainCol.appendChild(row)
     activeRow.classList.remove('active')
     resetListeners()
     scrollDiv()
 }
 
 function scrollDiv(){
-    let parentDiv = document.querySelector('#main-column')
+    let parentDiv = document.querySelector('#main-game')
     let appendedDiv = parentDiv.querySelector('.main-row.active')
     parentDiv.scrollTop = (appendedDiv.offsetTop - parentDiv.clientHeight / 2) + (appendedDiv.clientHeight / 2);
 }
 
 function resetListeners(){
-    let mainCol = document.querySelector('#main-column')
+    let mainCol = document.querySelector('#main-game')
     let prevRow = mainCol.lastElementChild
     let prevInputs = prevRow.querySelectorAll('.input')
     let activeRow = mainCol.querySelector('.main-row.active')
@@ -123,7 +126,7 @@ function resetListeners(){
 }
 
 function focusInput(e){
-    let mainCol = document.querySelector('#main-column')
+    let mainCol = document.querySelector('#main-game')
     let activeRow = mainCol.querySelector('.main-row.active')
     let activeInputs = activeRow.querySelectorAll('.input.focus')
     activeInputs.forEach(activeInput => {

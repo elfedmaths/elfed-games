@@ -1,6 +1,16 @@
+:root{
+    --main-back: #ffffff;
+    --main-font: #000000;
+    --main-border: #000000;
+    --main-shadow: #6b6b6b;
+    --main-error: #ff000071;
+    --main-succeess: #00ff0071;
+}
+
 *{
     box-sizing: border-box;
     cursor: default;
+    user-select: none;
 }
 
 body{
@@ -10,35 +20,52 @@ body{
     margin: 0;
     padding: 0;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    background-color: #ffffff;
+    background-color: var(--main-back);
     color: var(--main-font);
     font-size: 12px;
 }
 
-#main{
+#stats{
+    position: fixed;
+    left: 0.5em;
+    top: 0.5em;
+    font-size: 1em;
+    text-align: left;
+    cursor: context-menu;
+
+    h1{
+        font-size: 1.5em;
+    }
+
+    #error{
+        color: var(--main-error);
+    }
+}
+
+main{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: calc(100% - 120px);
-    margin-top: 55px;
-    padding: 0 20px;
-} 
+    height: 100%;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-#gameCanvas{
-    margin: auto;
-    margin-top: calc(50vh - 60px);
-    transform: translate(0,-50%);
-    border: 1px solid black;
-    box-sizing: border-box;
-}
+    #gameCanvas{
+        width: 100%;
+        margin: auto;
+        border: 0.1em solid var(--main-border);
+    }
 
-#gameCanvas.green{
-    box-shadow: 0 0 5px 5px #00ff0071;
-}
+    #gameCanvas.green{
+        box-shadow: 0 0 0.5em 0.5em var(--main-succeess);
+    }
 
-#gameCanvas.red{
-    box-shadow: 0 0 5px 5px #ff000071;
+    #gameCanvas.red{
+        box-shadow: 0 0 0.5em 0.5em var(--main-error);
+    }
 }
 
 #touch-container{
@@ -50,139 +77,117 @@ body{
     z-index: 1;
 }
 
-/* -------------------- */
-
-/* Corner Menu */
-
-.corner-menu {
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    z-index: 2;
-}
-
-.corner-menu .corner-btn{
-    flex: 0 0;
-    width: 50px;
-    height: 50px;
-    margin: 0 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 5px #000000;
-    cursor: pointer;
-}
-
-.corner-menu .corner-btn img{
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin: 10px;
-    position: relative;
-    cursor: pointer;
-    z-index: 3;
-}
-
-.corner-menu .corner-btn:hover img{
-    animation: pulse 2s linear infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-/* -------------------- */
-
-#footer{
-    font-size: 12px;
-    text-align: left;
-    padding-left: 10px;
-    cursor: context-menu;
-    position: fixed;
-    bottom: 5px;
-}
-
-/* -------------------- */
-
-/* Stats */
-
-#stats{
-    position: fixed;
-    left: 5px;
-    top: 5px;
-    font-size: 18px;
-    text-align: left;
-    cursor: context-menu;
-}
-
-#stats h1{
-    font-size: 24px;
-}
-
-#stats #error{
-    color: #ff0000;
-}
-
 #start-container{
-    position: absolute;
-    top: 55px;
-    width: 100vw;
-    height: calc(100vh - 120px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2;
+
+    #start-box{
+        width: 15em;
+        height: 10em;
+        border: 1px solid var(--main-border);
+        background-color: var(--main-back);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        #start-game{
+            font-size: 2em;
+            text-decoration: none;
+            font-weight: bold;
+            color: var(--main-font);
+            margin: 0.5em;
+            cursor: pointer;
+        }
+
+        .custom-select {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        
+            select {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                border: 0px;
+                cursor: pointer;
+                text-align: center;
+                padding: 0.1em 2em;
+            }
+        
+            select.error {
+                box-shadow: 0 0 0.5em 0.5em var(--main-error);
+            }
+        }
+
+        p{
+            margin: 0.5em;
+        }
+    }
 }
 
 #start-container.hidden, #start-container .hidden{
     display: none;
 }
 
-#start-container #start-box{
-    width: 200px;
-    height: 100px;
-    border: 1px solid #000000;
-    background-color: #ffffff;
+.corner-menu {
+    font-size: 12px;
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    z-index: 3;
+
+    .corner-btn{
+        flex: 0 0;
+        width: 5em;
+        height: 5em;
+        padding: 1em;
+        border-radius: 1em;
+        background-color: var(--main-back);
+        box-shadow: 0 0.1em 0.5em var(--main-shadow);
+        cursor: pointer;
+        z-index: 2;
+
+        img{
+            display: block;
+            width: 3em;
+            height: 3em;
+            position: relative;
+            cursor: pointer;
+            z-index: 1;
+        }
+    }
+
+    .pulse-btn:hover img{
+        animation: pulse 2s linear infinite;
+    }
 }
 
-#start-container #start-box #start-game{
-    font-size: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    color: #000000;
-    margin: 10px;
-    cursor: pointer;
+#footer{
+    position: fixed;
+    left: 0.5em;
+    bottom: 0.2em;
+    font-size: 12px;
+    text-align: left;
+    cursor: context-menu;
+
+    p{
+        margin: 0;
+    }
 }
 
-/* -------------------- */
-
-/* Dropdown Option */
-
-.custom-select {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.custom-select select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border: 0px;
-    cursor: pointer;
-    text-align: center;
-    padding: 2px 20px;
-}
-
-.custom-select select.error {
-    box-shadow: 0 0 5px 5px #ff000071;
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }

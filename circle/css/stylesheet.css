@@ -1,6 +1,15 @@
+:root{
+    --main-back: #ffffff;
+    --main-font: #000000;
+    --main-border: #000000;
+    --main-shadow: #6b6b6b;
+    --main-error: #ff0000;
+}
+
 *{
     box-sizing: border-box;
     cursor: default;
+    user-select: none;
 }
 
 body{
@@ -13,9 +22,26 @@ body{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    background-color: #ffffff;
+    background-color: var(--main-back);
     color: var(--main-font);
     font-size: 12px;
+}
+
+#stats{
+    position: fixed;
+    left: 0.5em;
+    top: 0.5em;
+    font-size: 1em;
+    text-align: left;
+    cursor: context-menu;
+
+    h1{
+        font-size: 1.5em;
+    }
+
+    #error{
+        color: var(--main-error);
+    }
 }
 
 #canvas{
@@ -23,77 +49,57 @@ body{
     height: 100%;
 }
 
-#stats{
-    position: fixed;
-    left: 5px;
-    top: 5px;
-    font-size: 18px;
-    text-align: left;
-    cursor: context-menu;
-}
-
-#stats h1{
-    font-size: 24px;
-}
-
-#error{
-    color: #ff0000;
-}
-
-/* -------------------- */
-
-/* Corner Menu */
-
 .corner-menu {
+    font-size: 12px;
     position: fixed;
-    right: 10px;
-    bottom: 10px;
-    height: 50px;
+    right: 1em;
+    bottom: 1em;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-end;
+
+    .corner-btn{
+        flex: 0 0;
+        width: 5em;
+        height: 5em;
+        padding: 1em;
+        border-radius: 1em;
+        background-color: var(--main-back);
+        box-shadow: 0 0.1em 0.5em var(--main-shadow);
+        cursor: pointer;
+        z-index: 2;
+
+        img{
+            display: block;
+            width: 3em;
+            height: 3em;
+            position: relative;
+            cursor: pointer;
+            z-index: 1;
+        }
+    }
+
+    .pulse-btn:hover img{
+        animation: pulse 2s linear infinite;
+    }
 }
 
-.corner-menu .corner-btn{
-    flex: 0 0;
-    width: 50px;
-    height: 50px;
-    margin: 0 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 5px #000000;
-    cursor: pointer;
-    z-index: 2;
-}
+#footer{
+    position: fixed;
+    left: 0.5em;
+    bottom: 0.2em;
+    font-size: 12px;
+    text-align: left;
+    cursor: context-menu;
 
-.corner-menu .corner-btn img{
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin: 10px;
-    position: relative;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.corner-menu .corner-btn:hover img{
-    animation: pulse 2s linear infinite;
+    p{
+        margin: 0;
+    }
 }
 
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
-}
-
-/* -------------------- */
-
-#footer{
-    font-size: 12px;
-    text-align: left;
-    padding-left: 10px;
-    cursor: context-menu;
-    position: fixed;
-    bottom: 5px;
 }

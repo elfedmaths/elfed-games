@@ -13,7 +13,6 @@ function keypadClick(e){
         e.target.classList.remove('click')
     }, 100)
     let key = e.target.innerHTML
-    console.log(key)
     switch(key){
         case '&gt;':
             moveRight()
