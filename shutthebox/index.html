@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shut The Box</title>
+	<meta name="author" content="M. Massey">
+	<meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+    <meta name="description" content="JS Maths Shut The Box Game">
+    <meta name="keywords" content="Maths, Elfed, Elfed High, Elfed High School, Elfed Maths, Maths Logic, Shut The Box, Game">
+    <meta name="subject" content="Elfed Maths - Shut The Box">
+    <meta name="robots" content="noindex, nofollow, nositelinkssearchbox, notranslate">
+    <meta name="rating" content="General">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="./css/resetstyle.css">
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="./js/index.script.js" defer></script>
+</head>
+<body>
+    <div id="header">
+        <h1>Shut The Box</h1>
+    </div>
+    <div id="main">
+        <div id="dice-container">
+            <div class="dice" id="dice-1">
+                <div class="side one"></div>
+                <div class="side two"></div>
+                <div class="side three"></div>
+                <div class="side four"></div>
+                <div class="side five"></div>
+                <div class="side six"></div>
+            </div>
+            <div class="dice" id="dice-2">
+                <div class="side one"></div>
+                <div class="side two"></div>
+                <div class="side three"></div>
+                <div class="side four"></div>
+                <div class="side five"></div>
+                <div class="side six"></div>
+            </div>              
+        </div>
+        <div id="tile-container">
+            <div class="tile-row">
+                <div class="tile" data-roll="1">
+                    <div class="side one"><p>1</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="2">
+                    <div class="side one"><p>2</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="3">
+                    <div class="side one"><p>3</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="4">
+                    <div class="side one"><p>4</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="5">
+                    <div class="side one"><p>5</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="6">
+                    <div class="side one"><p>6</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+            </div>
+            <div class="tile-row">
+                <div class="tile" data-roll="7">
+                    <div class="side one"><p>7</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="8">
+                    <div class="side one"><p>8</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="9">
+                    <div class="side one"><p>9</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="10">
+                    <div class="side one"><p>10</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="11">
+                    <div class="side one"><p>11</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+                <div class="tile" data-roll="12">
+                    <div class="side one"><p>12</p></div>
+                    <div class="side two"></div>
+                    <div class="side three"></div>
+                    <div class="side four"></div>
+                    <div class="side five"></div>
+                    <div class="side six"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <dialog>
+        <div>
+            <h1 id="heading"></h1>
+            <p id="message"></p>
+            <h2>Game Rules</h2>
+            <p>Click to roll the dice</p>
+            <p>The target is the total of the two dice</p>
+            <p>Click the tiles that sum to the target</p>
+            <p>If you can shut all the tiles you win</p>
+            <p>If you are unable to pick another tile it is game over</p>
+            <form method="dialog">
+                <button type="submit" autofocus>START</button>
+            </form>
+        </div>
+    </dialog>
+    <div class="corner-menu">
+        <div class="corner-btn pulse-btn" id="home-btn">
+            <a href="../"><img src="./img/home-icon.svg" alt="Home"></a>
+        </div>
+    </div>
+    <div id="footer">
+        <p>Copyright &copy; 2023 -  <script>document.write(new Date().getFullYear())</script>, M. Massey.</p>
+    </div>
+</body>
+</html>
