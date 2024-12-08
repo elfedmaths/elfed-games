@@ -36,7 +36,6 @@ body{
         margin: 0.5em auto;
         font-size: 2em;
         text-decoration: none;
-        cursor: context-menu;
         color: var(--main-font);
     }
 
@@ -238,7 +237,6 @@ body{
     bottom: 0.2em;
     font-size: 12px;
     text-align: left;
-    cursor: context-menu;
 
     p{
         margin: 0;

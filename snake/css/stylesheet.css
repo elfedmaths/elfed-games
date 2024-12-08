@@ -31,7 +31,6 @@ body{
     top: 0.5em;
     font-size: 1em;
     text-align: left;
-    cursor: context-menu;
 
     h1{
         font-size: 1.5em;
@@ -46,17 +45,19 @@ main{
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 1em;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
+    padding: 5em;
+    margin: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
 
     #gameCanvas{
         width: 100%;
-        margin: auto;
+        height: 100%;
         border: 0.1em solid var(--main-border);
+        box-shadow: 0 0 1em var(--main-shadow);
     }
 
     #gameCanvas.green{
@@ -179,7 +180,6 @@ main{
     bottom: 0.2em;
     font-size: 12px;
     text-align: left;
-    cursor: context-menu;
 
     p{
         margin: 0;

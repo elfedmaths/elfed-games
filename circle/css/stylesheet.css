@@ -33,7 +33,6 @@ body{
     top: 0.5em;
     font-size: 1em;
     text-align: left;
-    cursor: context-menu;
 
     h1{
         font-size: 1.5em;
@@ -91,7 +90,6 @@ body{
     bottom: 0.2em;
     font-size: 12px;
     text-align: left;
-    cursor: context-menu;
 
     p{
         margin: 0;
